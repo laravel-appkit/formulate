@@ -1,23 +1,65 @@
 <?php
 
-namespace AppKit\:package_name_php\Tests;
+namespace AppKit\Formulate\Tests;
 
-use AppKit\:package_name_php\Tests\Models\Article;
 class ExampleTest extends TestCase
 {
     /** @test */
-    public function trueIsTrue()
+    public function formComponentExists()
     {
-        $this->assertTrue(true);
+        $view = $this->blade('<x-form></x-form>');
+
+        $view->assertHasElement('form');
     }
 
     /** @test */
-    public function artcilesCanBeLoaded()
+    public function formComponentsCanHaveAttributes()
     {
-        // create 5 articles
-        factory(Article::class, 5)->create();
+        $view = $this->blade('<x-form class="my-class"></x-form>');
 
-        // check the database for 5 articles
-        $this->assertEquals(5, Article::count());
+        $view->assertHasElement('form')->withAttributeValue('class', 'my-class');
+    }
+
+    /** @test */
+    public function formComponentsCanHaveAnAction()
+    {
+        $view = $this->blade('<x-form action="/"></x-form>');
+
+        $view->assertHasElement('form')->withAttributeValue('action', '/');
+    }
+
+    /** @test */
+    public function formComponentsCanHaveAGetMethod()
+    {
+        $view = $this->blade('<x-form action="/" method="GET"></x-form>');
+
+        $view->assertHasElement('form')->withAttributeValue('method', 'GET');
+    }
+
+    /** @test */
+    public function formComponentsCanHaveAPostMethod()
+    {
+        $view = $this->blade('<x-form action="/" method="POST"></x-form>');
+
+        $view->assertHasElement('form')->withAttributeValue('method', 'POST');
+        $view->assertHasElement('input[name="_token"]')->withAttributeValue('type', 'hidden')->withAttribute('value');
+    }
+
+    /** @test */
+    public function formComponentsCanHaveANonStandardMethod()
+    {
+        $view = $this->blade('<x-form action="/" method="PATCH"></x-form>');
+
+        $view->assertHasElement('form')->withAttributeValue('method', 'POST');
+        $view->assertHasElement('input[name="_token"]')->withAttributeValue('type', 'hidden')->withAttribute('value');
+        $view->assertHasElement('input[name="_method"]')->withAttributeValue('type', 'hidden')->withAttributeValue('value', 'PATCH');
+    }
+
+    /** @test */
+    public function formComponentsCanHaveSlotValue()
+    {
+        $view = $this->blade('<x-form action="/" method="GET"><p>Hello World</p></x-form>');
+
+        $view->assertHasElement('p')->withContents('Hello World');
     }
 }

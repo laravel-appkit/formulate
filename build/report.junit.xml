@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="7" assertions="22" errors="0" warnings="0" failures="0" skipped="0" time="0.178240">
+    <testsuite name="Laravel Test Suite" tests="7" assertions="22" errors="0" warnings="0" failures="0" skipped="0" time="0.178240">
+      <testsuite name="AppKit\Formulate\Tests\ExampleTest" file="/home/darren/projects/laravel-appkit/formulate/tests/ExampleTest.php" tests="7" assertions="22" errors="0" warnings="0" failures="0" skipped="0" time="0.178240">
+        <testcase name="formComponentExists" class="AppKit\Formulate\Tests\ExampleTest" classname="AppKit.Formulate.Tests.ExampleTest" file="/home/darren/projects/laravel-appkit/formulate/tests/ExampleTest.php" line="8" assertions="1" time="0.102227"/>
+        <testcase name="formComponentsCanHaveAttributes" class="AppKit\Formulate\Tests\ExampleTest" classname="AppKit.Formulate.Tests.ExampleTest" file="/home/darren/projects/laravel-appkit/formulate/tests/ExampleTest.php" line="16" assertions="2" time="0.010532"/>
+        <testcase name="formComponentsCanHaveAnAction" class="AppKit\Formulate\Tests\ExampleTest" classname="AppKit.Formulate.Tests.ExampleTest" file="/home/darren/projects/laravel-appkit/formulate/tests/ExampleTest.php" line="24" assertions="2" time="0.009656"/>
+        <testcase name="formComponentsCanHaveAGetMethod" class="AppKit\Formulate\Tests\ExampleTest" classname="AppKit.Formulate.Tests.ExampleTest" file="/home/darren/projects/laravel-appkit/formulate/tests/ExampleTest.php" line="32" assertions="2" time="0.011981"/>
+        <testcase name="formComponentsCanHaveAPostMethod" class="AppKit\Formulate\Tests\ExampleTest" classname="AppKit.Formulate.Tests.ExampleTest" file="/home/darren/projects/laravel-appkit/formulate/tests/ExampleTest.php" line="40" assertions="5" time="0.015075"/>
+        <testcase name="formComponentsCanHaveANonStandardMethod" class="AppKit\Formulate\Tests\ExampleTest" classname="AppKit.Formulate.Tests.ExampleTest" file="/home/darren/projects/laravel-appkit/formulate/tests/ExampleTest.php" line="49" assertions="8" time="0.015188"/>
+        <testcase name="formComponentsCanHaveSlotValue" class="AppKit\Formulate\Tests\ExampleTest" classname="AppKit.Formulate.Tests.ExampleTest" file="/home/darren/projects/laravel-appkit/formulate/tests/ExampleTest.php" line="59" assertions="2" time="0.013581"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

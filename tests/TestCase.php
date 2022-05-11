@@ -1,13 +1,16 @@
 <?php
 
-namespace AppKit\:package_name_php\Tests;
+namespace AppKit\Formulate\Tests;
 
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
-use AppKit\:package_name_php\:package_name_phpServiceProvider;
-use AppKit\:package_name_php\Facades\:package_name_php;
+use AppKit\Formulate\FormulateServiceProvider;
+use AppKit\Formulate\Facades\Formulate;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 
 class TestCase extends OrchestraTestCase
 {
+    use InteractsWithViews;
+
     /**
      * Setup the test environment
      */
@@ -33,7 +36,7 @@ class TestCase extends OrchestraTestCase
      */
     protected function getPackageProviders($app)
     {
-        return [:package_name_phpServiceProvider::class];
+        return [FormulateServiceProvider::class];
     }
 
     /**
@@ -45,7 +48,7 @@ class TestCase extends OrchestraTestCase
     protected function getPackageAliases($app)
     {
         return [
-            ':package_name_php' => :package_name_php::class
+            'Formulate' => Formulate::class
         ];
     }
 
