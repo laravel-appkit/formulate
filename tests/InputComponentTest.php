@@ -50,4 +50,36 @@ class InputComponentTest extends TestCase
 
         $view->assertHasElement('input')->withAttributeValue('id', 'my-id');
     }
+
+    /** @test */
+    public function inputComponentsCanHaveGroupAttributes()
+    {
+        $view = $this->blade('<x-input name="my-input" group:class="my-group"></x-input>');
+
+        $view->assertHasElement('div')->withAttributeValue('class', 'my-group');
+    }
+
+    /** @test */
+    public function inputComponentsCanHaveLabelAttributes()
+    {
+        $view = $this->blade('<x-input name="my-input" label:class="my-label"></x-input>');
+
+        $view->assertHasElement('label')->withAttributeValue('class', 'my-label');
+    }
+
+    /** @test */
+    public function inputComponentsGenerateLabelValues()
+    {
+        $view = $this->blade('<x-input name="my-input"></x-input>');
+
+        $view->assertHasElement('label')->withContents('My input');
+    }
+
+    /** @test */
+    public function inputComponentsCanHaveSetLabels()
+    {
+        $view = $this->blade('<x-input name="my-input" label="My label"></x-input>');
+
+        $view->assertHasElement('label')->withContents('My label');
+    }
 }
