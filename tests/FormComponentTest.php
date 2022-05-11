@@ -4,7 +4,7 @@ namespace AppKit\Formulate\Tests;
 
 use Illuminate\Support\Facades\Route;
 
-class ExampleTest extends TestCase
+class FormComponentTest extends TestCase
 {
     /** @test */
     public function formComponentExists()

@@ -25,3 +25,4 @@ Homestead.json
 .php_cs.cache
 
 !.gitkeep
+build/report.junit.xml
