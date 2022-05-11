@@ -2,6 +2,8 @@
 
 namespace AppKit\Formulate\Tests;
 
+use Illuminate\Support\Facades\Route;
+
 class ExampleTest extends TestCase
 {
     /** @test */
@@ -61,5 +63,28 @@ class ExampleTest extends TestCase
         $view = $this->blade('<x-form action="/" method="GET"><p>Hello World</p></x-form>');
 
         $view->assertHasElement('p')->withContents('Hello World');
+    }
+
+    /** @test */
+    public function formComponentCanHaveARoute()
+    {
+        Route::post('/example-route', 'ExampleController@example')->name('example');
+
+        $view = $this->blade('<x-form route="example"></x-form>');
+
+        $view->assertHasElement('form')->withAttributeValue('action', config('app.url') . '/example-route')->withAttributeValue('method', 'POST');
+        $view->assertHasElement('input[name="_token"]')->withAttributeValue('type', 'hidden')->withAttribute('value');
+    }
+
+    /** @test */
+    public function formComponentCanHaveARouteWithDifferentMethod()
+    {
+        Route::post('/example-route', 'ExampleController@example')->name('example');
+
+        $view = $this->blade('<x-form route="example" method="PATCH"></x-form>');
+
+        $view->assertHasElement('form')->withAttributeValue('action', config('app.url') . '/example-route')->withAttributeValue('method', 'POST');
+        $view->assertHasElement('input[name="_token"]')->withAttributeValue('type', 'hidden')->withAttribute('value');
+        $view->assertHasElement('input[name="_method"]')->withAttributeValue('type', 'hidden')->withAttributeValue('value', 'PATCH');
     }
 }

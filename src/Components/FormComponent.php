@@ -6,11 +6,31 @@ use Illuminate\View\Component;
 
 class FormComponent extends Component
 {
+    public $action;
+
     public $method;
 
-    public function __construct($method = 'GET')
+    public $route;
+
+    public function __construct($action = '', $method = null, $route = null)
     {
+        $this->action = $action;
         $this->method = $method;
+
+        if (!empty($route)) {
+            // we have a route, lets get the action from the url
+            $this->action = route($route);
+
+            // if we don't already have a method
+            if (empty($this->method)) {
+                // find the route that we have specified
+                $routes = app('router')->getRoutes();
+                $route = method_exists($routes, 'getByName') ? $routes->getByName($route) : $routes->get($route);
+
+                // use the first available method
+                $this->method = $route->methods[0];
+            }
+        }
     }
 
     /**
