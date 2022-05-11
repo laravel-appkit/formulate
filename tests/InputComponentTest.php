@@ -72,7 +72,7 @@ class InputComponentTest extends TestCase
     {
         $view = $this->blade('<x-input name="my-input"></x-input>');
 
-        $view->assertHasElement('label')->withContents('My input');
+        $view->assertHasElement('label')->withContent('My input');
     }
 
     /** @test */
@@ -80,6 +80,6 @@ class InputComponentTest extends TestCase
     {
         $view = $this->blade('<x-input name="my-input" label="My label"></x-input>');
 
-        $view->assertHasElement('label')->withContents('My label');
+        $view->assertHasElement('label')->withContent('My label');
     }
 }

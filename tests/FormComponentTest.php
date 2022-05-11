@@ -62,7 +62,7 @@ class FormComponentTest extends TestCase
     {
         $view = $this->blade('<x-form action="/" method="GET"><p>Hello World</p></x-form>');
 
-        $view->assertHasElement('p')->withContents('Hello World');
+        $view->assertHasElement('p')->withContent('Hello World');
     }
 
     /** @test */

@@ -44,7 +44,7 @@ class Element
         return $this;
     }
 
-    public function withContents($value)
+    public function withContent($value)
     {
         PHPUnit::assertEquals($value, $this->crawler->filter($this->path)->innerText());
 
