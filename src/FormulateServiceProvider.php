@@ -2,6 +2,7 @@
 
 namespace AppKit\Formulate;
 
+use AppKit\Formulate\Components\FieldGroupComponent;
 use AppKit\Formulate\Components\FormComponent;
 use AppKit\Formulate\Components\InputComponent;
 use AppKit\Formulate\Components\TextareaComponent;
@@ -17,6 +18,7 @@ class FormulateServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Blade::component('field-group', FieldGroupComponent::class);
         Blade::component('form', FormComponent::class);
         Blade::component('input', InputComponent::class);
         Blade::component('textarea', TextareaComponent::class);

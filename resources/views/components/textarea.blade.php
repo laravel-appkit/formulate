@@ -1,9 +1,3 @@
-<div {!! $groupAttributes !!}>
-    <label for="{{ $id }}" {!! $labelAttributes !!}>{{ $label }}</label>
-
+<x-field-group :field="$field">
     <textarea name="{{ $name }}" id="{{ $id }}" {!! $attributes !!}>{{ $value }}</textarea>
-
-    @if (isset($errors) && $errors->has($name))
-    <div>{{ $errors->first($name) }}</div>
-    @endif
-</div>
+</x-field-group>

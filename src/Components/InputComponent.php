@@ -22,6 +22,8 @@ class InputComponent extends Component
 
     public $value;
 
+    public $field;
+
     public function __construct($name, $type = 'text', $id = null, $label = null, $value = null)
     {
         $this->name = $name;
@@ -29,6 +31,7 @@ class InputComponent extends Component
         $this->id = $id;
         $this->label = $label;
         $this->value = Formulate::getFieldValue($this->name, $value);
+        $this->field = $this;
 
         if (empty($id)) {
             $this->id = $this->name;
