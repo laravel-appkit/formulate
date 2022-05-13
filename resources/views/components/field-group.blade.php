@@ -1,9 +1,7 @@
 <div {!! $field->groupAttributes !!}>
-    <label for="{{ $field->id }}" {!! $field->labelAttributes !!}>{{ $field->label }}</label>
+    <x-label :field="$field" />
 
     {{ $slot }}
 
-    @if (isset($errors) && $errors->has($field->name))
-    <div>{{ $errors->first($field->name) }}</div>
-    @endif
+    <x-field-errors :field="$field" />
 </div>

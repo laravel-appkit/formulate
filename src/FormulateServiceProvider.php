@@ -2,9 +2,11 @@
 
 namespace AppKit\Formulate;
 
+use AppKit\Formulate\Components\FieldErrorComponent;
 use AppKit\Formulate\Components\FieldGroupComponent;
 use AppKit\Formulate\Components\FormComponent;
 use AppKit\Formulate\Components\InputComponent;
+use AppKit\Formulate\Components\LabelComponent;
 use AppKit\Formulate\Components\TextareaComponent;
 use AppKit\Formulate\Tests\Element;
 use Illuminate\Support\Facades\Blade;
@@ -22,6 +24,8 @@ class FormulateServiceProvider extends ServiceProvider
         Blade::component('form', FormComponent::class);
         Blade::component('input', InputComponent::class);
         Blade::component('textarea', TextareaComponent::class);
+        Blade::component('label', LabelComponent::class);
+        Blade::component('field-errors', FieldErrorComponent::class);
 
         TestView::macro('assertHasElement', function ($path) {
             return tap((new Element($this->rendered)), function ($element) use ($path) {
