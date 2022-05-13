@@ -22,4 +22,15 @@ trait Mocks
         $this->instance(Request::class, $request);
         $this->instance('request', $request);
     }
+
+    public function withInvalidFields($fields = [])
+    {
+        $errorBag = [];
+
+        foreach ($fields as $field) {
+            $errorBag[$field] = [$field . ' Validation Error'];
+        }
+
+        $this->withViewErrors($errorBag);
+    }
 }

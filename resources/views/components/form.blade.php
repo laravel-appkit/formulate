@@ -7,5 +7,9 @@
     @method($method)
     @endif
 
+    @if (!empty($errors))
+    <div>Whoops! Something went wrong.</div>
+    @endif
+
     {{ $slot }}
 </form>
