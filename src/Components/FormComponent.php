@@ -2,6 +2,7 @@
 
 namespace AppKit\Formulate\Components;
 
+use AppKit\Formulate\Facades\Formulate;
 use Illuminate\View\Component;
 
 class FormComponent extends Component
@@ -12,10 +13,14 @@ class FormComponent extends Component
 
     public $route;
 
-    public function __construct($action = '', $method = null, $route = null)
+    public function __construct($action = '', $data = [], $method = null, $route = null)
     {
         $this->action = $action;
         $this->method = $method;
+
+        if (!empty($data)) {
+            Formulate::populateFormData($data);
+        }
 
         if (!empty($route)) {
             // we have a route, lets get the action from the url

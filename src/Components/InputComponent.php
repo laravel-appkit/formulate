@@ -2,6 +2,7 @@
 
 namespace AppKit\Formulate\Components;
 
+use AppKit\Formulate\Facades\Formulate;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
@@ -19,12 +20,15 @@ class InputComponent extends Component
 
     public $label;
 
-    public function __construct($name, $type = 'text', $id = null, $label = null)
+    public $value;
+
+    public function __construct($name, $type = 'text', $id = null, $label = null, $value = null)
     {
         $this->name = $name;
         $this->type = $type;
         $this->id = $id;
         $this->label = $label;
+        $this->value = Formulate::getFieldValue($this->name, $value);
 
         if (empty($id)) {
             $this->id = $this->name;
