@@ -87,4 +87,16 @@ class FormComponentTest extends TestCase
         $view->assertHasElement('input[name="_token"]')->withAttributeValue('type', 'hidden')->withAttribute('value');
         $view->assertHasElement('input[name="_method"]')->withAttributeValue('type', 'hidden')->withAttributeValue('value', 'PATCH');
     }
+
+    /** @test */
+    public function formComponentsCanHaveRoutesWithParams()
+    {
+        Route::post('/example-route/{name}', 'ExampleController@example')->name('example');
+
+        $params = ['name' => 'my-name'];
+        $view = $this->blade('<x-form route="example" :route-params="$params"></x-form>', compact('params'));
+
+        $view->assertHasElement('form')->withAttributeValue('action', config('app.url') . '/example-route/my-name')->withAttributeValue('method', 'POST');
+        $view->assertHasElement('input[name="_token"]')->withAttributeValue('type', 'hidden')->withAttribute('value');
+    }
 }

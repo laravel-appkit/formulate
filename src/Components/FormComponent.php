@@ -13,7 +13,7 @@ class FormComponent extends Component
 
     public $route;
 
-    public function __construct($action = '', $data = [], $method = null, $route = null)
+    public function __construct($action = '', $data = [], $method = null, $route = null, $routeParams = [])
     {
         $this->action = $action;
         $this->method = $method;
@@ -24,7 +24,7 @@ class FormComponent extends Component
 
         if (!empty($route)) {
             // we have a route, lets get the action from the url
-            $this->action = route($route);
+            $this->action = route($route, $routeParams);
 
             // if we don't already have a method
             if (empty($this->method)) {
