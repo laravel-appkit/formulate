@@ -56,6 +56,11 @@ class Formulate
             $value = $this->formData[$field];
         }
 
+        // if the value if a model, we are going to want its key
+        if ($value instanceof Model) {
+            $value = $value->getKey();
+        }
+
         $this->currentFieldValue = $value;
 
         return $value;

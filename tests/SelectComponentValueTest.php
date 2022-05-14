@@ -144,4 +144,23 @@ class SelectComponentValueTest extends TestCase
         $view->assertHasElement('select[name="my-input2"] option[value="d"]')->withAttribute('selected')->withContent('Option D');
         $view->assertHasElement('select[name="my-input3"] option[value="a"]')->withAttribute('selected')->withContent('Option A');
     }
+
+    /** @test */
+    public function selectComponentCanHaveAValueFromAModel()
+    {
+        // set the data that is passed to the form
+        $articles = factory(Article::class, 5)->create();
+        $firstArticle = Article::first();
+
+        $data = ['my-input' => $firstArticle];
+        $options = Article::all()->pluck('title', 'id');
+
+        // render the blade component
+        $view = $this->blade('<x-form :data="$data">
+            <x-select name="my-input" :options="$options" />
+        </x-form>', compact('data', 'options'));
+
+        // test the component
+        $view->assertHasElement('option[value="' . $firstArticle->id . '"]')->withAttribute('selected')->withContent($firstArticle->title);
+    }
 }
