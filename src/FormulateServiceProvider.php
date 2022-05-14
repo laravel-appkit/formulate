@@ -7,6 +7,8 @@ use AppKit\Formulate\Components\FieldGroupComponent;
 use AppKit\Formulate\Components\FormComponent;
 use AppKit\Formulate\Components\InputComponent;
 use AppKit\Formulate\Components\LabelComponent;
+use AppKit\Formulate\Components\OptionComponent;
+use AppKit\Formulate\Components\SelectComponent;
 use AppKit\Formulate\Components\TextareaComponent;
 use AppKit\Formulate\Tests\Element;
 use Illuminate\Support\Facades\Blade;
@@ -26,6 +28,8 @@ class FormulateServiceProvider extends ServiceProvider
         Blade::component('textarea', TextareaComponent::class);
         Blade::component('label', LabelComponent::class);
         Blade::component('field-errors', FieldErrorComponent::class);
+        Blade::component('select', SelectComponent::class);
+        Blade::component('option', OptionComponent::class);
 
         TestView::macro('assertHasElement', function ($path) {
             return tap((new Element($this->rendered)), function ($element) use ($path) {
