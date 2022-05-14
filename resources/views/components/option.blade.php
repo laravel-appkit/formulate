@@ -1,1 +1,1 @@
-<option {!! $attributes !!}>{{ $slot }}</option>
+<option value="{{ $value }}" {!! $selected ? 'selected="selected"' : '' !!} {!! $attributes !!}>{{ $slot }}</option>

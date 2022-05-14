@@ -19,5 +19,6 @@ $factory->define(Article::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence,
         'body' => $faker->paragraph,
+        'category' => $faker->randomElement(['a', 'b', 'c', 'd', 'e'])
     ];
 });
