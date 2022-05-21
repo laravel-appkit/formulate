@@ -24,14 +24,31 @@ class InputComponent extends Component
 
     public $field;
 
-    public function __construct($name, $type = 'text', $id = null, $label = null, $value = null)
+    public $checked = false;
+
+    public function __construct($name, $type = 'text', $checked = false, $id = null, $label = null, $value = null)
     {
         $this->name = $name;
         $this->type = $type;
         $this->id = $id;
         $this->label = $label;
-        $this->value = Formulate::getFieldValue($this->name, $value);
         $this->field = $this;
+        $this->checked = $checked;
+
+        if ($type == 'radio') {
+            $this->value = $value;
+            $fieldValue = Formulate::getFieldValue($this->name);
+
+            if (!is_null($fieldValue)) {
+                if (is_bool($fieldValue)) {
+                    $this->checked = $fieldValue;
+                } else {
+                    $this->checked = $fieldValue == $value;
+                }
+            }
+        } else {
+            $this->value = Formulate::getFieldValue($this->name, $value);
+        }
 
         if (empty($id)) {
             $this->id = $this->name;

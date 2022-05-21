@@ -37,6 +37,13 @@ class Element
         return $this;
     }
 
+    public function withoutAttribute($attribute)
+    {
+        PHPUnit::assertNull($this->crawler->filter($this->path)->attr($attribute));
+
+        return $this;
+    }
+
     public function withAttributeValue($attribute, $value)
     {
         PHPUnit::assertEquals($value, $this->crawler->filter($this->path)->attr($attribute));

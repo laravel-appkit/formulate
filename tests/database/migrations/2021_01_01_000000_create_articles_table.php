@@ -18,6 +18,8 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->text('body');
             $table->string('category');
+            $table->boolean('published');
+            $table->string('featured');
             $table->timestamps();
         });
     }

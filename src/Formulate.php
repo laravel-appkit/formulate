@@ -39,14 +39,14 @@ class Formulate
         return $this->currentFieldValue;
     }
 
-    public function getFieldValue($field, $defaultValue = '')
+    public function getFieldValue($field, $defaultValue = null)
     {
         $this->currentField = $field;
 
         $value = $defaultValue;
 
         // if we have a value in the "old" request, it should come next
-        if (!empty($this->app['request']->old($field))) {
+        if (!is_null($this->app['request']->old($field))) {
             $value = $this->app['request']->old($field);
         } elseif ($this->formData instanceof Model && !empty($this->formData->getAttribute($field))) {
             // then we try and get the attribute from a model
