@@ -8,54 +8,62 @@ use Illuminate\View\Component;
 
 class InputComponent extends Component
 {
-    public $id;
-
-    public $name;
-
-    public $type;
-
+    public $checked = false;
+    public $field;
     public $groupAttributes;
-
-    public $labelAttributes;
-
+    public $id;
     public $label;
-
+    public $labelAttributes;
+    public $name;
+    public $type;
     public $value;
 
-    public $field;
-
-    public $checked = false;
-
-    public function __construct($name, $type = 'text', $checked = false, $id = null, $label = null, $value = null)
+    public function __construct($name, $checked = false, $id = null, $label = null, $type = 'text', $value = null)
     {
-        $this->name = $name;
-        $this->type = $type;
+        $this->checked = $checked;
+        $this->field = $this;
         $this->id = $id;
         $this->label = $label;
-        $this->field = $this;
-        $this->checked = $checked;
+        $this->name = $name;
+        $this->type = $type;
 
-        if ($type == 'radio') {
+        // register the field with the service provider
+        Formulate::registerField($this);
+
+        // if the field does not have a defined id
+        if (empty($id)) {
+            // formulate will generate one
+            $this->id = Formulate::generateFieldId($this);
+        }
+
+        // if we don't have a label
+        if (empty($label)) {
+            // then generate one
+            $this->label = ucfirst(str_replace(['-', '_'], ' ', $name));
+        }
+
+        // if this is a checkable type
+        if ($type == 'checkbox' || $type == 'radio') {
+            // the value on the field is the one we have passed
             $this->value = $value;
-            $fieldValue = Formulate::getFieldValue($this->name);
 
-            if (!is_null($fieldValue)) {
-                if (is_bool($fieldValue)) {
-                    $this->checked = $fieldValue;
+            // the checked value comes from the service provider
+            $checkedValue = Formulate::getFieldValue($this->name);
+
+            // if we have a checked value
+            if (!is_null($checkedValue)) {
+                // which is a boolean
+                if (is_bool($checkedValue)) {
+                    // we check the field based on that
+                    $this->checked = $checkedValue;
                 } else {
-                    $this->checked = $fieldValue == $value;
+                    // otherwise, we check if the value passed to the form matches the value of the field
+                    $this->checked = $checkedValue == $value;
                 }
             }
         } else {
+            // for all other fields, we just get the value from the service provider
             $this->value = Formulate::getFieldValue($this->name, $value);
-        }
-
-        if (empty($id)) {
-            $this->id = $this->name;
-        }
-
-        if (empty($label)) {
-            $this->label = ucfirst(str_replace(['-', '_'], ' ', $name));
         }
     }
 
