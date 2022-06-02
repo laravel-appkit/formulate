@@ -2,7 +2,6 @@
 
 namespace AppKit\Formulate\Tests;
 
-use AppKit\Formulate\Facades\Formulate;
 use AppKit\Formulate\Tests\Concerns\Mocks;
 use AppKit\Formulate\Tests\Models\Article;
 

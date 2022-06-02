@@ -3,9 +3,7 @@
 namespace AppKit\Formulate\Tests;
 
 use Illuminate\Testing\Assert as PHPUnit;
-use Illuminate\Testing\TestView;
 use Symfony\Component\DomCrawler\Crawler;
-
 
 class Element
 {
