@@ -52,13 +52,17 @@ class InputComponent extends Component
 
             // if we have a checked value
             if (!is_null($checkedValue)) {
-                // which is a boolean
-                if (is_bool($checkedValue)) {
-                    // we check the field based on that
-                    $this->checked = $checkedValue;
+                if (is_array($checkedValue)) {
+                    $this->checked = in_array($value, $checkedValue);
                 } else {
-                    // otherwise, we check if the value passed to the form matches the value of the field
-                    $this->checked = $checkedValue == $value;
+                    // which is a boolean
+                    if (is_bool($checkedValue)) {
+                        // we check the field based on that
+                        $this->checked = $checkedValue;
+                    } else {
+                        // otherwise, we check if the value passed to the form matches the value of the field
+                        $this->checked = $checkedValue == $value;
+                    }
                 }
             }
         } else {

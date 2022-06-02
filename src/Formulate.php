@@ -2,6 +2,7 @@
 
 namespace AppKit\Formulate;
 
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
@@ -59,6 +60,10 @@ class Formulate
 
         $value = $defaultValue;
 
+        if (str_contains($field, '[]')) {
+            $field = str_replace('[]', '', $field);
+        }
+
         // if we have a value in the "old" request, it should come next
         if (!is_null($this->app['request']->old($field))) {
             $value = $this->app['request']->old($field);
@@ -68,6 +73,10 @@ class Formulate
         } elseif (is_array($this->formData) && array_key_exists($field, $this->formData)) {
             // or from an array
             $value = $this->formData[$field];
+        }
+
+        if ($value instanceof EloquentCollection) {
+            $value = $value->modelKeys();
         }
 
         // if the value if a model, we are going to want its key
