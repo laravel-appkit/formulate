@@ -7,7 +7,8 @@ use Mockery;
 
 trait Mocks
 {
-    public function mockPostedValues($data = []) {
+    public function mockPostedValues($data = [])
+    {
         // create a mock request
         $request = Mockery::mock(Request::class, function ($mock) use ($data) {
             foreach ($data as $field => $value) {

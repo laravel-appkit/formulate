@@ -2,10 +2,10 @@
 
 namespace AppKit\Formulate\Tests;
 
-use Orchestra\Testbench\TestCase as OrchestraTestCase;
-use AppKit\Formulate\FormulateServiceProvider;
 use AppKit\Formulate\Facades\Formulate;
+use AppKit\Formulate\FormulateServiceProvider;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
+use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 class TestCase extends OrchestraTestCase
 {
@@ -48,7 +48,7 @@ class TestCase extends OrchestraTestCase
     protected function getPackageAliases($app)
     {
         return [
-            'Formulate' => Formulate::class
+            'Formulate' => Formulate::class,
         ];
     }
 
@@ -63,9 +63,9 @@ class TestCase extends OrchestraTestCase
         // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testbench');
         $app['config']->set('database.connections.testbench', [
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix' => '',
         ]);
     }
 }
