@@ -7,8 +7,8 @@
     @method($method)
     @endif
 
-    @if (!empty($errors))
-    <div>Whoops! Something went wrong.</div>
+    @if (isset($errors) && $errors->any())
+    <div>{{ config('formulate.form_error_message') }}</div>
     @endif
 
     {{ $slot }}
