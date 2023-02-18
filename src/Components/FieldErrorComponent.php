@@ -8,7 +8,6 @@ class FieldErrorComponent extends Component
 {
     public function __construct(public InputComponent $field)
     {
-
     }
 
     /**

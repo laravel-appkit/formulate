@@ -8,7 +8,6 @@ class LabelComponent extends Component
 {
     public function __construct(public InputComponent $field)
     {
-
     }
 
     /**

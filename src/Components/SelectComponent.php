@@ -2,7 +2,6 @@
 
 namespace AppKit\Formulate\Components;
 
-use AppKit\Formulate\Facades\Formulate;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection as SupportCollection;
 
