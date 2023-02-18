@@ -112,7 +112,8 @@ class InputComponent extends Component
      * @param null|string $prefix
      * @return array
      */
-    public function getPrefixedAttributes(array $attributes, ?string $prefix = null): array {
+    public function getPrefixedAttributes(array $attributes, ?string $prefix = null): array
+    {
         // filter over a collection of attributes
         return collect($attributes)->filter(function ($attributeValue, $attribute) use ($prefix) {
             // special case if we are dealing with the null prefix
@@ -126,6 +127,7 @@ class InputComponent extends Component
         })->mapWithKeys(function ($attributeValue, $attribute) use ($prefix) {
             // strip the prefix off of the attribute name
             $attribute = Str::of($attribute)->replace($prefix . ':', '')->__toString();
+
             return [$attribute => $attributeValue];
         })->toArray();
     }
@@ -137,7 +139,8 @@ class InputComponent extends Component
      * @param array $defaults
      * @return void
      */
-    public function setDefaultAttributeValues(ComponentAttributeBag $attributeBag, array $defaults = []) {
+    public function setDefaultAttributeValues(ComponentAttributeBag $attributeBag, array $defaults = [])
+    {
         // loop through each of the defaults
         foreach ($defaults as $attribute => $value) {
             // check if we don't already have a value for it
