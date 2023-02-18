@@ -91,55 +91,67 @@ class InputComponent extends Component
         // make sure that we have an attribute bag setup for everything
         $this->attributes = $this->attributes ?: $this->newAttributeBag();
 
+        // split out all of the attribute bags
+        $this->attributes->setAttributes($this->getPrefixedAttributes($attributes));
+        $this->groupAttributes->setAttributes($this->getPrefixedAttributes($attributes, 'group'));
+        $this->labelAttributes->setAttributes($this->getPrefixedAttributes($attributes, 'label'));
 
-        $this->attributes->setAttributes(
-            collect($attributes)->filter(function ($attributeValue, $attribute) {
-                return !Str::of($attribute)->startsWith('group:') && !Str::of($attribute)->startsWith('label:');
-            })->toArray()
-        );
+        // add the default attributes to each attribute bag
+        $this->setDefaultAttributeValues($this->attributes, ['class' => config('formulate.classes.field')]);
+        $this->setDefaultAttributeValues($this->groupAttributes, ['class' => config('formulate.classes.group')]);
+        $this->setDefaultAttributeValues($this->labelAttributes, ['class' => config('formulate.classes.label')]);
 
-        $this->groupAttributes->setAttributes(
-            collect($attributes)->filter(function ($attributeValue, $attribute) {
-                return Str::of($attribute)->startsWith('group:');
-            })->mapWithKeys(function ($attributeValue, $attribute) {
-                $attribute = Str::of($attribute)->replace('group:', '')->__toString();
-
-                return [$attribute => $attributeValue];
-            })->toArray()
-        );
-
-        $this->labelAttributes->setAttributes(
-            collect($attributes)->filter(function ($attributeValue, $attribute) {
-                return Str::of($attribute)->startsWith('label:');
-            })->mapWithKeys(function ($attributeValue, $attribute) {
-                $attribute = Str::of($attribute)->replace('label:', '')->__toString();
-
-                return [$attribute => $attributeValue];
-            })->toArray()
-        );
-
-        if (!$this->attributes->has('class')) {
-            $this->addAttribute($this->attributes, 'class', config('formulate.classes.field'));
-        }
-
-        if (!$this->labelAttributes->has('class')) {
-            $this->addAttribute($this->labelAttributes, 'class', config('formulate.classes.label'));
-        }
-
-        if (!$this->groupAttributes->has('class')) {
-            $this->addAttribute($this->groupAttributes, 'class', config('formulate.classes.group'));
-        }
-
+        // return the instance of the component
         return $this;
     }
 
-    public function addAttribute(ComponentAttributeBag $attributeBag, $attribute, $value): void
-    {
-        $attributes = $attributeBag->getAttributes();
+    /**
+     * Filter out a list of attributes based on the prefix
+     *
+     * @param array $attributes
+     * @param null|string $prefix
+     * @return array
+     */
+    public function getPrefixedAttributes(array $attributes, ?string $prefix = null): array {
+        // filter over a collection of attributes
+        return collect($attributes)->filter(function ($attributeValue, $attribute) use ($prefix) {
+            // special case if we are dealing with the null prefix
+            if (is_null($prefix)) {
+                // in which case, we want to check if the attribute contains any prefix separator
+                return !Str::of($attribute)->contains(':');
+            }
 
-        $attributes[$attribute] = $value;
+            // pick this one if it starts with the correct prefix
+            return Str::of($attribute)->startsWith($prefix . ':');
+        })->mapWithKeys(function ($attributeValue, $attribute) use ($prefix) {
+            // strip the prefix off of the attribute name
+            $attribute = Str::of($attribute)->replace($prefix . ':', '')->__toString();
+            return [$attribute => $attributeValue];
+        })->toArray();
+    }
 
-        $attributeBag->setAttributes($attributes);
+    /**
+     * Add default attributes into an existing attribute bag
+     *
+     * @param ComponentAttributeBag $attributeBag
+     * @param array $defaults
+     * @return void
+     */
+    public function setDefaultAttributeValues(ComponentAttributeBag $attributeBag, array $defaults = []) {
+        // loop through each of the defaults
+        foreach ($defaults as $attribute => $value) {
+            // check if we don't already have a value for it
+            if (!$attributeBag->has($attribute)) {
+                // get the current attributes in the bag
+                $currentAttributes = $attributeBag->getAttributes();
+
+                // set the attribute
+                $currentAttributes[$attribute] = $value;
+
+                // update the attribute bag
+                $attributeBag->setAttributes($currentAttributes);
+            }
+        }
     }
 
     /**
