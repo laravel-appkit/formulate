@@ -7,7 +7,13 @@ use Mockery;
 
 trait Mocks
 {
-    public function mockPostedValues($data = [])
+    /**
+     * Mock that we have passed the following information in the POST request
+     *
+     * @param array $data
+     * @return void
+     */
+    public function mockPostedValues(array $data = [])
     {
         // create a mock request
         $request = Mockery::mock(Request::class, function ($mock) use ($data) {
@@ -24,7 +30,13 @@ trait Mocks
         $this->instance('request', $request);
     }
 
-    public function withInvalidFields($fields = [])
+    /**
+     * Mock that the given fields have validation errors
+     *
+     * @param array $fields
+     * @return void
+     */
+    public function withInvalidFields(array $fields = [])
     {
         $errorBag = [];
 
