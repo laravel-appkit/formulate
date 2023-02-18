@@ -36,7 +36,7 @@ class FormulateServiceProvider extends ServiceProvider
             'textarea' => TextareaComponent::class,
         ];
 
-        // allow prefixing of compoennts
+        // allow prefixing of components
         $componentPrefix = config('formulate.component_prefix', '');
 
         if ($componentPrefix && !str_ends_with($componentPrefix, '-')) {

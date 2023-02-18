@@ -197,4 +197,22 @@ class Formulate
         // otherwise, we just use the name
         return $name;
     }
+
+    /**
+     * Get the dynamic name of a component, based on a name
+     *
+     * @param string $name
+     * @return string
+     */
+    public function getDynamicComponentName(string $name)
+    {
+        // allow prefixing of components
+        $componentPrefix = config('formulate.component_prefix', '');
+
+        if ($componentPrefix && !str_ends_with($componentPrefix, '-')) {
+            $componentPrefix = $componentPrefix . '-';
+        }
+
+        return $componentPrefix. $name;
+    }
 }

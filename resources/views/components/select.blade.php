@@ -2,7 +2,7 @@
     <select name="{{ $name }}" id="{{ $id }}" {!! $attributes !!}>
         @if (!empty($options))
             @foreach ($options as $value => $title)
-            <x-option :value="$value">{{ $title }}</x-option>
+            <x-dynamic-component component="{{ Formulate::getDynamicComponentName('option') }}" :value="$value">{{ $title }}</x-dynamic-component>
             @endforeach
         @else
         {{ $slot }}
