@@ -23,15 +23,24 @@ class FormulateServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::component('field-group', FieldGroupComponent::class);
-        Blade::component('form', FormComponent::class);
-        Blade::component('input', InputComponent::class);
-        Blade::component('textarea', TextareaComponent::class);
-        Blade::component('label', LabelComponent::class);
-        Blade::component('field-errors', FieldErrorComponent::class);
-        Blade::component('select', SelectComponent::class);
-        Blade::component('option', OptionComponent::class);
-        Blade::component('checkables', CheckablesComponent::class);
+        // define the blade components that this package exposes
+        $components = [
+            'checkables' => CheckablesComponent::class,
+            'field-errors' => FieldErrorComponent::class,
+            'field-group' => FieldGroupComponent::class,
+            'form' => FormComponent::class,
+            'input' => InputComponent::class,
+            'label' => LabelComponent::class,
+            'option' => OptionComponent::class,
+            'select' => SelectComponent::class,
+            'textarea' => TextareaComponent::class,
+        ];
+
+        // loop through them
+        foreach ($components as $name => $componentClass) {
+            // and register them
+            Blade::component($name, $componentClass);
+        }
 
         TestView::macro('assertHasElement', function ($path) {
             return tap((new Element($this->rendered)), function ($element) use ($path) {
@@ -42,33 +51,12 @@ class FormulateServiceProvider extends ServiceProvider
         /*
          * Optional methods to load your package assets
          */
-        // $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'formulate');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'formulate');
-        // $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__ . '/../routes/formulate.php');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../config/config.php' => config_path('formulate.php'),
             ], 'config');
-
-            // Publishing the views.
-            /*$this->publishes([
-                __DIR__ . '/../resources/views' => resource_path('views/vendor/formulate'),
-            ], 'views');*/
-
-            // Publishing assets.
-            /*$this->publishes([
-                __DIR__ . '/../resources/assets' => public_path('vendor/formulate'),
-            ], 'assets');*/
-
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__ . '/../resources/lang' => resource_path('lang/vendor/formulate'),
-            ], 'lang');*/
-
-            // Registering package commands.
-            // $this->commands([]);
         }
     }
 
