@@ -4,30 +4,44 @@ namespace AppKit\Formulate\Components;
 
 use AppKit\Formulate\Facades\Formulate;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\View\Component;
 
-class SelectComponent extends InputComponent
+class CheckablesComponent extends Component
 {
-    public $options = [];
+    public $checked = false;
+    public $field;
+    public $groupAttributes;
+    public $id;
+    public $label;
+    public $labelAttributes;
+    public $name;
+    public $type;
+    public $value;
+    public $options;
 
-    public function __construct($name, $type = 'text', $id = null, $label = null, $value = null, $options = [])
+    public function __construct($name, $type, $id = null, $label = null, $options = [])
     {
-        $this->name = $name;
-        $this->type = $type;
+        $this->field = $this;
         $this->id = $id;
         $this->label = $label;
-        $this->value = Formulate::getFieldValue($this->name, $value);
-        $this->field = $this;
+        $this->name = $name;
+        $this->type = $type;
+        $this->options = $options;
 
+        // register the field with the service provider
+        Formulate::registerField($this);
+
+        // if the field does not have a defined id
         if (empty($id)) {
-            $this->id = $this->name;
+            // formulate will generate one
+            $this->id = Formulate::generateFieldId($this);
         }
 
+        // if we don't have a label
         if (empty($label)) {
+            // then generate one
             $this->label = ucfirst(str_replace(['-', '_'], ' ', $name));
         }
-
-        $this->options = $options;
 
         if ($this->options instanceof Collection) {
             $newOptions = [];
@@ -48,12 +62,6 @@ class SelectComponent extends InputComponent
 
             $this->options = $newOptions;
         }
-
-        if ($this->options instanceof SupportCollection) {
-            $this->options = $this->options->toArray();
-        }
-
-        // $this->options = array_merge([null => '-- Please Select --'], $this->options);
     }
 
     /**
@@ -63,6 +71,6 @@ class SelectComponent extends InputComponent
      */
     public function render()
     {
-        return view('formulate::components.select');
+        return view('formulate::components.checkables');
     }
 }

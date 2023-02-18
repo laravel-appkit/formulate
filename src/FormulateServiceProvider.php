@@ -2,6 +2,7 @@
 
 namespace AppKit\Formulate;
 
+use AppKit\Formulate\Components\CheckablesComponent;
 use AppKit\Formulate\Components\FieldErrorComponent;
 use AppKit\Formulate\Components\FieldGroupComponent;
 use AppKit\Formulate\Components\FormComponent;
@@ -30,6 +31,7 @@ class FormulateServiceProvider extends ServiceProvider
         Blade::component('field-errors', FieldErrorComponent::class);
         Blade::component('select', SelectComponent::class);
         Blade::component('option', OptionComponent::class);
+        Blade::component('checkables', CheckablesComponent::class);
 
         TestView::macro('assertHasElement', function ($path) {
             return tap((new Element($this->rendered)), function ($element) use ($path) {

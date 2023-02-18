@@ -15,10 +15,13 @@ class FormComponent extends Component
 
     public function __construct($action = '', $data = [], $method = null, $route = null, $routeParams = [])
     {
+        // promote the constructor params
         $this->action = $action;
         $this->method = $method;
 
+        // if we have some data that has been passed into the form
         if (!empty($data)) {
+            // pass it to the service provider which is used to populate the fields
             Formulate::populateFormData($data);
         }
 

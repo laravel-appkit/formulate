@@ -5,6 +5,8 @@ namespace AppKit\Formulate\Components;
 use AppKit\Formulate\Facades\Formulate;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
+use Illuminate\View\ComponentAttributeBag;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
 class InputComponent extends Component
 {
@@ -79,6 +81,7 @@ class InputComponent extends Component
      */
     public function withAttributes(array $attributes)
     {
+        // make sure that we have an attribute bag setup for everything
         $this->attributes = $this->attributes ?: $this->newAttributeBag();
         $this->groupAttributes = $this->groupAttributes ?: $this->newAttributeBag();
         $this->labelAttributes = $this->labelAttributes ?: $this->newAttributeBag();
@@ -93,7 +96,8 @@ class InputComponent extends Component
             collect($attributes)->filter(function ($attributeValue, $attribute) {
                 return Str::of($attribute)->startsWith('group:');
             })->mapWithKeys(function ($attributeValue, $attribute) {
-                return [str_replace('group:', '', $attribute) => $attributeValue];
+                $attribute = Str::of($attribute)->replace('group:', '')->__toString();
+                return [$attribute => $attributeValue];
             })->toArray()
         );
 
@@ -101,28 +105,33 @@ class InputComponent extends Component
             collect($attributes)->filter(function ($attributeValue, $attribute) {
                 return Str::of($attribute)->startsWith('label:');
             })->mapWithKeys(function ($attributeValue, $attribute) {
-                return [str_replace('label:', '', $attribute) => $attributeValue];
+                $attribute = Str::of($attribute)->replace('label:', '')->__toString();
+                return [$attribute => $attributeValue];
             })->toArray()
         );
+
+        if (!$this->attributes->has('class')) {
+            $this->addAttribute($this->attributes, 'class', config('formulate.classes.field'));
+        }
+
+        if (!$this->labelAttributes->has('class')) {
+            $this->addAttribute($this->labelAttributes, 'class', config('formulate.classes.label'));
+        }
+
+        if (!$this->groupAttributes->has('class')) {
+            $this->addAttribute($this->groupAttributes, 'class', config('formulate.classes.group'));
+        }
 
         return $this;
     }
 
-    /**
-     * Get the data that should be supplied to the view.
-     *
-     * @author Freek Van der Herten
-     * @author Brent Roose
-     *
-     * @return array
-     */
-    public function data()
+    public function addAttribute(ComponentAttributeBag $attributeBag, $attribute, $value)
     {
-        $this->attributes = $this->attributes ?: $this->newAttributeBag();
-        $this->groupAttributes = $this->groupAttributes ?: $this->newAttributeBag();
-        $this->labelAttributes = $this->labelAttributes ?: $this->newAttributeBag();
+        $attributes = $attributeBag->getAttributes();
 
-        return array_merge($this->extractPublicProperties(), $this->extractPublicMethods());
+        $attributes[$attribute] = $value;
+
+        $attributeBag->setAttributes($attributes);
     }
 
     /**

@@ -8,7 +8,7 @@
     @endif
 
     @if (isset($errors) && $errors->any())
-    <div>{{ config('formulate.form_error_message') }}</div>
+    <div class="{{ config('formulate.classes.form_error') }}">{{ config('formulate.form_error_message') }}</div>
     @endif
 
     {{ $slot }}
