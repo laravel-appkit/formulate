@@ -1,0 +1,9 @@
+# Ideas
+
+- [ ] Allow help text to be added to a field
+- [ ] Allow a developer to specify a closure to generate a field label
+- [ ] Required / Optional fields and the display of them
+- [ ] Allow validation (required, max etc) to be specified in the form of an array or as an instance of a validator on the form component
+- [ ] Automatically infer the validation from a form controller based on the route / route + method
+- [ ] Allow help text / field names etc to be specified in a central location
+- [ ] Don't auto fill hidden model attributes
