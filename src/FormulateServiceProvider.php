@@ -36,10 +36,17 @@ class FormulateServiceProvider extends ServiceProvider
             'textarea' => TextareaComponent::class,
         ];
 
+        // allow prefixing of compoennts
+        $componentPrefix = config('formulate.component_prefix', '');
+
+        if ($componentPrefix && !str_ends_with($componentPrefix, '-')) {
+            $componentPrefix = $componentPrefix . '-';
+        }
+
         // loop through them
         foreach ($components as $name => $componentClass) {
             // and register them
-            Blade::component($name, $componentClass);
+            Blade::component($componentPrefix . $name, $componentClass);
         }
 
         TestView::macro('assertHasElement', function ($path) {
