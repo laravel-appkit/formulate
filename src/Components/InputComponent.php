@@ -103,6 +103,7 @@ class InputComponent extends Component
                 return Str::of($attribute)->startsWith('group:');
             })->mapWithKeys(function ($attributeValue, $attribute) {
                 $attribute = Str::of($attribute)->replace('group:', '')->__toString();
+
                 return [$attribute => $attributeValue];
             })->toArray()
         );
@@ -112,6 +113,7 @@ class InputComponent extends Component
                 return Str::of($attribute)->startsWith('label:');
             })->mapWithKeys(function ($attributeValue, $attribute) {
                 $attribute = Str::of($attribute)->replace('label:', '')->__toString();
+
                 return [$attribute => $attributeValue];
             })->toArray()
         );
