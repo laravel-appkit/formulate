@@ -6,46 +6,53 @@ use AppKit\Formulate\Facades\Formulate;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Illuminate\View\ComponentAttributeBag;
-use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
 class InputComponent extends Component
 {
-    public $checked = false;
-    public $field;
-    public $groupAttributes;
-    public $id;
-    public $label;
-    public $labelAttributes;
-    public $name;
-    public $type;
-    public $value;
+    /**
+     * A reference to this instance of the input component
+     * @var InputComponent
+     */
+    public InputComponent $field;
 
-    public function __construct($name, $checked = false, $id = null, $label = null, $type = 'text', $value = null)
-    {
-        $this->checked = $checked;
+    /**
+     * An attribute bag to store all of the attributes that are placed on the group element
+     * @var ComponentAttributeBag
+     */
+    public ComponentAttributeBag $groupAttributes;
+
+    /**
+     * An attribute bag to store all of the attributes that are placed on the label element
+     * @var ComponentAttributeBag
+     */
+    public ComponentAttributeBag $labelAttributes;
+
+    public function __construct(
+        public string $name,
+        public bool $checked = false,
+        public ?string $id = null,
+        public ?string $label = null,
+        public string $type = 'text',
+        public mixed $value = null,
+    ) {
+        // store an instance of this class as the field, this is passed to child components
         $this->field = $this;
-        $this->id = $id;
-        $this->label = $label;
-        $this->name = $name;
-        $this->type = $type;
+
+        // create instances of the necessary attribute bags
+        $this->groupAttributes = $this->newAttributeBag();
+        $this->labelAttributes = $this->newAttributeBag();
 
         // register the field with the service provider
         Formulate::registerField($this);
 
-        // if the field does not have a defined id
-        if (empty($id)) {
-            // formulate will generate one
-            $this->id = Formulate::generateFieldId($this);
-        }
+        // if the field does not have a defined id, then generate one
+        $this->id = $this->id ?: Formulate::generateFieldId($this);
 
-        // if we don't have a label
-        if (empty($label)) {
-            // then generate one
-            $this->label = ucfirst(str_replace(['-', '_'], ' ', $name));
-        }
+        // if we don't have a label, then we need to generate one
+        $this->label = $this->label ?: ucfirst(str_replace(['-', '_'], ' ', $this->name));
 
         // if this is a checkable type
-        if ($type == 'checkbox' || $type == 'radio') {
+        if ($this->type == 'checkbox' || $this->type == 'radio') {
             // the value on the field is the one we have passed
             $this->value = $value;
 
@@ -83,8 +90,7 @@ class InputComponent extends Component
     {
         // make sure that we have an attribute bag setup for everything
         $this->attributes = $this->attributes ?: $this->newAttributeBag();
-        $this->groupAttributes = $this->groupAttributes ?: $this->newAttributeBag();
-        $this->labelAttributes = $this->labelAttributes ?: $this->newAttributeBag();
+
 
         $this->attributes->setAttributes(
             collect($attributes)->filter(function ($attributeValue, $attribute) {
@@ -125,7 +131,7 @@ class InputComponent extends Component
         return $this;
     }
 
-    public function addAttribute(ComponentAttributeBag $attributeBag, $attribute, $value)
+    public function addAttribute(ComponentAttributeBag $attributeBag, $attribute, $value): void
     {
         $attributes = $attributeBag->getAttributes();
 

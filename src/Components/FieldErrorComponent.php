@@ -6,11 +6,9 @@ use Illuminate\View\Component;
 
 class FieldErrorComponent extends Component
 {
-    public $field;
-
-    public function __construct($field)
+    public function __construct(public InputComponent $field)
     {
-        $this->field = $field;
+
     }
 
     /**

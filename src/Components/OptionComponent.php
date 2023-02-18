@@ -7,14 +7,14 @@ use Illuminate\View\Component;
 
 class OptionComponent extends Component
 {
-    public $selected = false;
+    /**
+     * If the current option in the select is selected
+     * @var bool
+     */
+    public bool $selected = false;
 
-    public $value;
-
-    public function __construct($value)
+    public function __construct(public string $value)
     {
-        $this->value = $value;
-
         if ($value == Formulate::getCurrentFieldValue()) {
             $this->selected = true;
         }

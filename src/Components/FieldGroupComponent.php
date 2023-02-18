@@ -6,11 +6,9 @@ use Illuminate\View\Component;
 
 class FieldGroupComponent extends Component
 {
-    public $field;
-
-    public function __construct($field)
+    public function __construct(public InputComponent $field)
     {
-        $this->field = $field;
+
     }
 
     /**

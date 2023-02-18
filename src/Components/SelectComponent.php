@@ -3,57 +3,48 @@
 namespace AppKit\Formulate\Components;
 
 use AppKit\Formulate\Facades\Formulate;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection as SupportCollection;
 
 class SelectComponent extends InputComponent
 {
-    public $options = [];
+    public function __construct(
+        public string $name,
+        public ?string $id = null,
+        public ?string $label = null,
+        public mixed $value = null,
+        public array | EloquentCollection | SupportCollection $options = [],
+    ) {
+        // the InputComponent will sort out most of the stuff for us
+        parent::__construct($name, false, $id, $label, 'select', $value);
 
-    public function __construct($name, $type = 'text', $id = null, $label = null, $value = null, $options = [])
-    {
-        $this->name = $name;
-        $this->type = $type;
-        $this->id = $id;
-        $this->label = $label;
-        $this->value = Formulate::getFieldValue($this->name, $value);
-        $this->field = $this;
-
-        if (empty($id)) {
-            $this->id = $this->name;
-        }
-
-        if (empty($label)) {
-            $this->label = ucfirst(str_replace(['-', '_'], ' ', $name));
-        }
-
-        $this->options = $options;
-
-        if ($this->options instanceof Collection) {
+        // we just need to handle the options
+        if ($this->options instanceof EloquentCollection) {
+            // get a new array for storing the parsed options
             $newOptions = [];
 
             foreach ($this->options as $option) {
-                $title = null;
-
                 if ($option->offsetExists('name')) {
+                    // an attribute of name will be our first preference
                     $title = $option->name;
                 } elseif ($option->offsetExists('title')) {
+                    // then it will be a title attribute
                     $title = $option->title;
                 } else {
+                    // and if we don't have any of them, we will just generate something
                     $title = class_basename($option) . ' #' . $option->getKey();
                 }
 
+                // add the new option to the new options array
                 $newOptions[$option->getKey()] = $title;
             }
 
+            // update the options with the parsed ones
             $this->options = $newOptions;
-        }
-
-        if ($this->options instanceof SupportCollection) {
+        } elseif ($this->options instanceof SupportCollection) {
+            // if this is a standard collection, then we just turn it into an array
             $this->options = $this->options->toArray();
         }
-
-        // $this->options = array_merge([null => '-- Please Select --'], $this->options);
     }
 
     /**

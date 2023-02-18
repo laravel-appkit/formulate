@@ -3,22 +3,18 @@
 namespace AppKit\Formulate\Components;
 
 use AppKit\Formulate\Facades\Formulate;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\Component;
 
 class FormComponent extends Component
 {
-    public $action;
-
-    public $method;
-
-    public $route;
-
-    public function __construct($action = '', $data = [], $method = null, $route = null, $routeParams = [])
-    {
-        // promote the constructor params
-        $this->action = $action;
-        $this->method = $method;
-
+    public function __construct(
+        public string $action = '',
+        public ?string $method = null,
+        public ?string $route = null,
+        array $routeParams = [],
+        array | Model $data = [],
+    ) {
         // if we have some data that has been passed into the form
         if (!empty($data)) {
             // pass it to the service provider which is used to populate the fields
