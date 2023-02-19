@@ -8,6 +8,7 @@
          convertWarningsToExceptions="false"
          processIsolation="false"
          stopOnFailure="false"
+         failOnWarning="false"
          verbose="true"
 >
     <testsuites>
