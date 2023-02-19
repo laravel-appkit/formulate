@@ -7,3 +7,5 @@
 - [ ] Automatically infer the validation from a form controller based on the route / route + method
 - [ ] Allow help text / field names etc to be specified in a central location
 - [ ] Don't auto fill hidden model attributes
+- [ ] Use an actual DTO to represent the Field, rather than just passing the component around
+- [ ] Automatically apply model route params if the data element passed to the form is an instance of the required model
