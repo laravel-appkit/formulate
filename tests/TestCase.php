@@ -5,6 +5,7 @@ namespace AppKit\Formulate\Tests;
 use AppKit\Formulate\Facades\Formulate;
 use AppKit\Formulate\FormulateServiceProvider;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
+use Illuminate\Testing\TestView;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 class TestCase extends OrchestraTestCase
@@ -26,6 +27,12 @@ class TestCase extends OrchestraTestCase
 
         // load the model factories
         $this->withFactories(__DIR__ . '/database/factories');
+
+        TestView::macro('assertHasElement', function ($path) {
+            return tap((new Element($this->rendered)), function ($element) use ($path) {
+                $element->assertElementExists($path);
+            });
+        });
     }
 
     /**

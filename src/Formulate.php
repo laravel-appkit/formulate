@@ -2,7 +2,15 @@
 
 namespace AppKit\Formulate;
 
+use AppKit\Formulate\Components\CheckablesComponent;
+use AppKit\Formulate\Components\FieldErrorComponent;
+use AppKit\Formulate\Components\FieldGroupComponent;
+use AppKit\Formulate\Components\FormComponent;
 use AppKit\Formulate\Components\InputComponent;
+use AppKit\Formulate\Components\LabelComponent;
+use AppKit\Formulate\Components\OptionComponent;
+use AppKit\Formulate\Components\SelectComponent;
+use AppKit\Formulate\Components\TextareaComponent;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
@@ -10,6 +18,7 @@ use Illuminate\Database\Eloquent\InvalidCastException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\LazyLoadingViolationException;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Blade;
 use LogicException;
 
 class Formulate
@@ -54,6 +63,28 @@ class Formulate
     {
         $this->app = app();
         $this->fields = new Collection();
+    }
+
+    public function registerComponents()
+    {
+        // define the blade components that this package exposes
+        $components = [
+            'checkables' => CheckablesComponent::class,
+            'field-errors' => FieldErrorComponent::class,
+            'field-group' => FieldGroupComponent::class,
+            'form' => FormComponent::class,
+            'input' => InputComponent::class,
+            'label' => LabelComponent::class,
+            'option' => OptionComponent::class,
+            'select' => SelectComponent::class,
+            'textarea' => TextareaComponent::class,
+        ];
+
+        // loop through them
+        foreach ($components as $name => $componentClass) {
+            // and register them
+            Blade::component($componentClass, $name, config('formulate.component_prefix', ''));
+        }
     }
 
     /**

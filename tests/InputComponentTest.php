@@ -2,6 +2,8 @@
 
 namespace AppKit\Formulate\Tests;
 
+use Illuminate\View\ViewException;
+
 class InputComponentTest extends TestCase
 {
     /** @test */
@@ -12,9 +14,10 @@ class InputComponentTest extends TestCase
         $view->assertHasElement('input')->withAttributeValue('name', 'my-input');
     }
 
+    /** @test */
     public function inputComponentsMustHaveAName()
     {
-        $this->expectException(Illuminate\View\ViewException::class);
+        $this->expectException(ViewException::class);
 
         $this->blade('<x-input></x-input>');
     }
