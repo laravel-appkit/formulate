@@ -3,10 +3,8 @@
 namespace AppKit\Formulate;
 
 use AppKit\Formulate\Facades\Formulate as FormulateFacade;
-use AppKit\Formulate\Tests\Element;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Testing\TestView;
 
 class FormulateServiceProvider extends ServiceProvider
 {
