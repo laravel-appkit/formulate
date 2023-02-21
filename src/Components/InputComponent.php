@@ -34,6 +34,7 @@ class InputComponent extends Component
         public ?string $label = null,
         public string $type = 'text',
         public mixed $value = null,
+        public bool $required = false,
     ) {
         // store an instance of this class as the field, this is passed to child components
         $this->field = $this;
