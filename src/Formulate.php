@@ -246,4 +246,24 @@ class Formulate
 
         return $componentPrefix. $name;
     }
+
+    /**
+     * Signal that the form label should show optional fields, not required fields
+     *
+     * @return void
+     */
+    public function highlightOptionalFields(): void
+    {
+        config(['formulate.highlight_optional_fields' => true]);
+    }
+
+    /**
+     * Signal that the form label should show required fields, not optional fields
+     *
+     * @return void
+     */
+    public function highlightRequiredFields(): void
+    {
+        config(['formulate.highlight_optional_fields' => false]);
+    }
 }

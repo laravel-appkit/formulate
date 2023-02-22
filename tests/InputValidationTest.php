@@ -2,6 +2,8 @@
 
 namespace AppKit\Formulate\Tests;
 
+use AppKit\Formulate\Facades\Formulate;
+
 class InputValidationTest extends TestCase
 {
     /** @test */
@@ -39,7 +41,7 @@ class InputValidationTest extends TestCase
     /** @test */
     public function inputsThatAreRequiredDoNotHaveTheOptionalLabel()
     {
-        config(['formulate.highlight_optional_fields' => true]);
+        Formulate::highlightOptionalFields();
 
         $view = $this->blade('<x-input name="my-input" required></x-input>');
 
@@ -49,7 +51,7 @@ class InputValidationTest extends TestCase
     /** @test */
     public function inputsThatAreRequiredDoHaveTheOptionalLabel()
     {
-        config(['formulate.highlight_optional_fields' => true]);
+        Formulate::highlightOptionalFields();
 
         $view = $this->blade('<x-input name="my-input"></x-input>');
 
