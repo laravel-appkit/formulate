@@ -6,7 +6,7 @@
 return [
     'form_error_message' => 'Whoops! Something went wrong.',
 
-    'component_prefix' => '',
+    'component_prefix' => 'formulate',
 
     'highlight_optional_fields' => false,
 
