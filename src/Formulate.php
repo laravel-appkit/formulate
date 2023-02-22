@@ -65,7 +65,7 @@ class Formulate
         $this->fields = new Collection();
     }
 
-    public function registerComponents()
+    public function registerComponents($prefix)
     {
         // define the blade components that this package exposes
         $components = [
@@ -83,7 +83,7 @@ class Formulate
         // loop through them
         foreach ($components as $name => $componentClass) {
             // and register them
-            Blade::component($componentClass, $name, config('formulate.component_prefix', ''));
+            Blade::component($componentClass, $name, $prefix);
         }
     }
 

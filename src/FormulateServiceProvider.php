@@ -39,6 +39,6 @@ class FormulateServiceProvider extends ServiceProvider
         });
 
         // Register the blade components
-        FormulateFacade::registerComponents();
+        FormulateFacade::registerComponents(config('formulate.component_prefix', ''));
     }
 }
