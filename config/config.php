@@ -14,5 +14,6 @@ return [
         'form_error' => 'mb-4 font-bold text-white bg-red-800 p-3 rounded-md',
         'group' => 'mb-4',
         'label' => 'block font-medium text-sm text-gray-700',
+        'required' => 'text-red-800',
     ],
 ];

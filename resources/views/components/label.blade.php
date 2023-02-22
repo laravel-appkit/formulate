@@ -2,6 +2,6 @@
     {{ $field->label }}
 
     @if ($field->required)
-    <span>*</span>
+    <span class="{{ config('formulate.classes.required') }}">*</span>
     @endif
 </label>
