@@ -35,4 +35,24 @@ class InputValidationTest extends TestCase
 
         $view->assertHasElement('label')->assertElementDoesntExists('span');
     }
+
+    /** @test */
+    public function inputsThatAreRequiredDoNotHaveTheOptionalLabel()
+    {
+        config(['formulate.highlight_optional_fields' => true]);
+
+        $view = $this->blade('<x-input name="my-input" required></x-input>');
+
+        $view->assertHasElement('label')->assertElementDoesntExists('span');
+    }
+
+    /** @test */
+    public function inputsThatAreRequiredDoHaveTheOptionalLabel()
+    {
+        config(['formulate.highlight_optional_fields' => true]);
+
+        $view = $this->blade('<x-input name="my-input"></x-input>');
+
+        $view->assertHasElement('label')->assertElementExists('span')->withContentContaining('Optional');
+    }
 }
