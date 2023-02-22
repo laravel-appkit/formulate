@@ -33,6 +33,8 @@ class TestCase extends OrchestraTestCase
                 $element->assertElementExists($path);
             });
         });
+
+        Formulate::registerComponents();
     }
 
     /**
@@ -74,5 +76,17 @@ class TestCase extends OrchestraTestCase
             'database' => ':memory:',
             'prefix' => '',
         ]);
+    }
+
+    /**
+     * Define routes setup.
+     *
+     * @param  \Illuminate\Routing\Router  $router
+     *
+     * @return void
+     */
+    protected function defineRoutes($router)
+    {
+        $router->post('/user', 'AppKit\Formulate\Tests\Controllers\TestController@store')->name('user.store');
     }
 }

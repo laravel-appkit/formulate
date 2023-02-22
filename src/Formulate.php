@@ -65,7 +65,7 @@ class Formulate
         $this->fields = new Collection();
     }
 
-    public function registerComponents($prefix)
+    public function registerComponents(string $prefix = '')
     {
         // define the blade components that this package exposes
         $components = [
