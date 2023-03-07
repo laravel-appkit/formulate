@@ -87,6 +87,6 @@ class TestCase extends OrchestraTestCase
      */
     protected function defineRoutes($router)
     {
-        $router->post('/user', 'AppKit\Formulate\Tests\Controllers\TestController@store')->name('user.store');
+        $router->resource('article', 'AppKit\Formulate\Tests\Controllers\ArticleController');
     }
 }

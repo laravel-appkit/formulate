@@ -3,6 +3,7 @@
 namespace AppKit\Formulate\Components;
 
 use AppKit\Formulate\Facades\Formulate;
+use AppKit\Formulate\Helpers\Routing\Route;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\Component;
 
@@ -12,7 +13,7 @@ class FormComponent extends Component
         public string $action = '',
         public ?string $method = null,
         public ?string $route = null,
-        array $routeParams = [],
+        ?array $routeParams = null,
         array | Model $data = [],
     ) {
         // if we have some data that has been passed into the form
@@ -22,17 +23,16 @@ class FormComponent extends Component
         }
 
         if (!empty($route)) {
+            // get the route details
+            $routeDetails = new Route($route);
+
             // we have a route, lets get the action from the url
-            $this->action = route($route, $routeParams);
+            $this->action = $routeDetails->createRouteUrlWithPossibleDefaultBindings($routeParams, $data);
 
             // if we don't already have a method
             if (empty($this->method)) {
-                // find the route that we have specified
-                $routes = app('router')->getRoutes();
-                $route = method_exists($routes, 'getByName') ? $routes->getByName($route) : $routes->get($route);
-
                 // use the first available method
-                $this->method = $route->methods[0];
+                $this->method = $routeDetails->getDefaultHttpMethod();
             }
         }
     }
