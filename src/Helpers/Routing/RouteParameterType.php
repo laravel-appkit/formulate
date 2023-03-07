@@ -2,7 +2,8 @@
 
 namespace AppKit\Formulate\Helpers\Routing;
 
-enum RouteParameterType {
+enum RouteParameterType
+{
     case Request;
     case UrlRoutable;
     case Other;

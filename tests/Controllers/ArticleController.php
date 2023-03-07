@@ -12,7 +12,9 @@ use Illuminate\Routing\Controller as BaseController;
 
 class ArticleController extends BaseController
 {
-    use AuthorizesRequests, ValidatesRequests;
+    use AuthorizesRequests;
+    use ValidatesRequests;
+
     /**
      * Display a listing of the resource.
      */
