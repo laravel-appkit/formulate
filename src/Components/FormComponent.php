@@ -15,7 +15,10 @@ class FormComponent extends Component
         public ?string $route = null,
         ?array $routeParams = null,
         array | Model $data = [],
+        public bool | string $xData = false,
     ) {
+        Formulate::registerForm($this);
+
         // if we have some data that has been passed into the form
         if (!empty($data)) {
             // pass it to the service provider which is used to populate the fields

@@ -19,7 +19,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\LazyLoadingViolationException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Js;
+use Illuminate\View\ComponentAttributeBag;
 use LogicException;
+use stdClass;
 
 class Formulate
 {
@@ -28,6 +31,8 @@ class Formulate
      * @var mixed|Application
      */
     private $app;
+
+    protected $form;
 
     /**
      * A collection of fields that are used within the current form
@@ -85,6 +90,16 @@ class Formulate
             // and register them
             Blade::component($componentClass, $name, $prefix);
         }
+    }
+
+    public function registerForm($form)
+    {
+        // store the form instance
+        $this->form = $form;
+
+        // reset the fields and form data
+        $this->fields = new Collection();
+        $this->formData = [];
     }
 
     /**
@@ -227,6 +242,24 @@ class Formulate
 
         // otherwise, we just use the name
         return $name;
+    }
+
+    public function applyDynamicFormAttributes(ComponentAttributeBag $attributes)
+    {
+        if ($this->form->xData) {
+            $xData = [];
+
+            $xData = $this->fields->mapWithKeys(function ($field) {
+                return [$field->name => $field->value ?? ''];
+            });
+
+            // we need to generate xdata
+            $attributes['x-data'] = Js::from($xData, JSON_FORCE_OBJECT);
+
+            // dd($attributes);
+        }
+
+        return $attributes;
     }
 
     /**

@@ -1,4 +1,4 @@
-<form action="{{ $action }}" method="{{ in_array($method, ['GET', 'POST']) ? $method : 'POST' }}" {{ $attributes }}>
+<form action="{{ $action }}" method="{{ in_array($method, ['GET', 'POST']) ? $method : 'POST' }}" {{ Formulate::applyDynamicFormAttributes($attributes) }}>
     @if($method != 'GET')
     @csrf
     @endif
