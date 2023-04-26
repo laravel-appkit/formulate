@@ -2,8 +2,6 @@
 
 namespace AppKit\Formulate\Tests;
 
-use AppKit\Formulate\Facades\Formulate;
-use AppKit\Formulate\Helpers\Routing\Route;
 use AppKit\Formulate\Tests\Models\Article;
 
 class ModelRouteBindingTest extends TestCase
