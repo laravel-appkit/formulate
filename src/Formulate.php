@@ -24,7 +24,6 @@ use Illuminate\Support\Js;
 use Illuminate\View\Component;
 use Illuminate\View\ComponentAttributeBag;
 use LogicException;
-use stdClass;
 
 class Formulate
 {
