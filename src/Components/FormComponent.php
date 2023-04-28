@@ -3,6 +3,7 @@
 namespace AppKit\Formulate\Components;
 
 use AppKit\Formulate\Facades\Formulate;
+use AppKit\Formulate\FormulateComponentAttributeBag;
 use AppKit\Formulate\Helpers\Routing\Route;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\Component;
@@ -14,8 +15,7 @@ class FormComponent extends Component
         public ?string $method = null,
         public ?string $route = null,
         ?array $routeParams = null,
-        array | Model $data = [],
-        public bool | string $xData = false,
+        array | Model $data = []
     ) {
         Formulate::registerForm($this);
 
@@ -41,12 +41,26 @@ class FormComponent extends Component
     }
 
     /**
+     * Get a new attribute bag instance.
+     *
+     * @param  array  $attributes
+     * @return AppKit\Formulate\FormulateComponentAttributeBag
+     */
+    protected function newAttributeBag(array $attributes = [])
+    {
+        return new FormulateComponentAttributeBag($attributes);
+    }
+
+
+    /**
      * Get the view / contents that represent the component.
      *
      * @return \Illuminate\View\View|\Closure|string
      */
     public function render()
     {
-        return view('formulate::components.form');
+        return function ($data) {
+            return view('formulate::components.form', Formulate::applyComponentMiddleware($this, $data))->render();
+        };
     }
 }

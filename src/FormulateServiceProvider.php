@@ -3,6 +3,7 @@
 namespace AppKit\Formulate;
 
 use AppKit\Formulate\Facades\Formulate as FormulateFacade;
+use AppKit\Formulate\Middleware\ApplyAlpineJsFormAttributes;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -40,5 +41,7 @@ class FormulateServiceProvider extends ServiceProvider
 
         // Register the blade components
         FormulateFacade::registerComponents(config('formulate.component_prefix', ''));
+
+        FormulateFacade::registerMiddleware(ApplyAlpineJsFormAttributes::class);
     }
 }

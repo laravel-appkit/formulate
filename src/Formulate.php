@@ -17,9 +17,11 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\InvalidCastException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\LazyLoadingViolationException;
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Js;
+use Illuminate\View\Component;
 use Illuminate\View\ComponentAttributeBag;
 use LogicException;
 use stdClass;
@@ -32,7 +34,11 @@ class Formulate
      */
     private $app;
 
-    protected $form;
+    /**
+     * The current form
+     * @var FormComponent
+     */
+    protected FormComponent $form;
 
     /**
      * A collection of fields that are used within the current form
@@ -57,6 +63,12 @@ class Formulate
      * @var mixed
      */
     protected $currentFieldValue;
+
+    /**
+     * The middleware that should be applied
+     * @var array
+     */
+    protected $middleware = [];
 
     /**
      * Create a new instance of Formulate
@@ -244,22 +256,37 @@ class Formulate
         return $name;
     }
 
-    public function applyDynamicFormAttributes(ComponentAttributeBag $attributes)
+    public function registerMiddleware($middleware)
     {
-        if ($this->form->xData) {
-            $xData = [];
+        if (!in_array($middleware, $this->middleware)) {
+            $this->middleware[] = $middleware;
+        }
+    }
 
-            $xData = $this->fields->mapWithKeys(function ($field) {
-                return [$field->name => $field->value ?? ''];
-            });
+    public function applyComponentMiddleware(Component $component, array $data)
+    {
+        $componentName = class_basename($component);
 
-            // we need to generate xdata
-            $attributes['x-data'] = Js::from($xData, JSON_FORCE_OBJECT);
+        $data['attributes'] = Formulate::applyMiddleware($data['attributes'], 'get' . $componentName . 'Attributes');
 
-            // dd($attributes);
+        return $data;
+    }
+
+    public function applyMiddleware($passable, $method)
+    {
+        // if we don't have any middleware, just return the passable
+        if (empty($this->middleware)) {
+            return $passable;
         }
 
-        return $attributes;
+        // create a pipeline that we will use the process the middleware
+        $pipeline = new Pipeline(app());
+
+        // send the passable through the middleware via the method that has been specified, then return the result
+        return $pipeline->send($passable)
+            ->through($this->middleware)
+            ->via($method)
+            ->thenReturn();
     }
 
     /**
