@@ -20,9 +20,7 @@ use Illuminate\Database\LazyLoadingViolationException;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Js;
 use Illuminate\View\Component;
-use Illuminate\View\ComponentAttributeBag;
 use LogicException;
 
 class Formulate
