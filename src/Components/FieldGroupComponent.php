@@ -2,21 +2,33 @@
 
 namespace AppKit\Formulate\Components;
 
+use AppKit\Formulate\Components\Concerns\InheritsAttributes;
+use AppKit\Formulate\Facades\Formulate;
+use AppKit\Formulate\FormulateComponentAttributeBag;
 use Illuminate\View\Component;
 
-class FieldGroupComponent extends Component
+class FieldGroupComponent extends BaseComponent
 {
+    use InheritsAttributes;
+
+    /**
+     * Initialise the field group component
+     *
+     * @param InputComponent $field
+     * @return void
+     */
     public function __construct(public InputComponent $field)
     {
+        $this->inheritAttributes($field->groupAttributes);
     }
 
     /**
-     * Get the view / contents that represent the component.
+     * Define the view name that is used for the component
      *
-     * @return \Illuminate\View\View|\Closure|string
+     * @return string
      */
-    public function render()
+    protected function viewName()
     {
-        return view('formulate::components.field-group');
+        return 'formulate::components.field-group';
     }
 }

@@ -1,4 +1,4 @@
-<label for="{{ $field->id }}" {!! $field->labelAttributes !!}>
+<label for="{{ $field->id }}" {!! $attributes !!}>
     {{ $field->label }}
 
     @if ($field->required && !config('formulate.highlight_optional_fields', false))

@@ -3,11 +3,12 @@
 namespace AppKit\Formulate\Components;
 
 use AppKit\Formulate\Facades\Formulate;
+use AppKit\Formulate\FormulateComponentAttributeBag;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Illuminate\View\ComponentAttributeBag;
 
-class InputComponent extends Component
+class InputComponent extends BaseComponent
 {
     /**
      * A reference to this instance of the input component
@@ -97,11 +98,6 @@ class InputComponent extends Component
         $this->groupAttributes->setAttributes($this->getPrefixedAttributes($attributes, 'group'));
         $this->labelAttributes->setAttributes($this->getPrefixedAttributes($attributes, 'label'));
 
-        // add the default attributes to each attribute bag
-        $this->setDefaultAttributeValues($this->attributes, ['class' => config('formulate.classes.field')]);
-        $this->setDefaultAttributeValues($this->groupAttributes, ['class' => config('formulate.classes.group')]);
-        $this->setDefaultAttributeValues($this->labelAttributes, ['class' => config('formulate.classes.label')]);
-
         // return the instance of the component
         return $this;
     }
@@ -134,37 +130,12 @@ class InputComponent extends Component
     }
 
     /**
-     * Add default attributes into an existing attribute bag
+     * Define the view name that is used for the component
      *
-     * @param ComponentAttributeBag $attributeBag
-     * @param array $defaults
-     * @return void
+     * @return string
      */
-    public function setDefaultAttributeValues(ComponentAttributeBag $attributeBag, array $defaults = [])
+    protected function viewName()
     {
-        // loop through each of the defaults
-        foreach ($defaults as $attribute => $value) {
-            // check if we don't already have a value for it
-            if (!$attributeBag->has($attribute)) {
-                // get the current attributes in the bag
-                $currentAttributes = $attributeBag->getAttributes();
-
-                // set the attribute
-                $currentAttributes[$attribute] = $value;
-
-                // update the attribute bag
-                $attributeBag->setAttributes($currentAttributes);
-            }
-        }
-    }
-
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\View\View|\Closure|string
-     */
-    public function render()
-    {
-        return view('formulate::components.input');
+        return 'formulate::components.input';
     }
 }

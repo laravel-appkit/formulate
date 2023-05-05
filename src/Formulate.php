@@ -281,9 +281,14 @@ class Formulate
         // create a pipeline that we will use the process the middleware
         $pipeline = new Pipeline(app());
 
+        // we don't need all of the middleware to have each method, so we need to filter
+        $filteredMiddleware = collect($this->middleware)->filter(function ($middleware) use ($method) {
+            return method_exists($middleware, $method);
+        })->toArray();
+
         // send the passable through the middleware via the method that has been specified, then return the result
         return $pipeline->send($passable)
-            ->through($this->middleware)
+            ->through($filteredMiddleware)
             ->via($method)
             ->thenReturn();
     }

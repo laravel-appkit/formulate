@@ -1,4 +1,4 @@
-<div {!! $field->groupAttributes !!}>
+<div {!! $attributes !!}>
     <x-dynamic-component component="{{ Formulate::getDynamicComponentName('label') }}" :field="$field" />
 
     {{ $slot }}

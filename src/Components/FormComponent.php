@@ -51,7 +51,6 @@ class FormComponent extends Component
         return new FormulateComponentAttributeBag($attributes);
     }
 
-
     /**
      * Get the view / contents that represent the component.
      *
