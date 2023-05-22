@@ -2,7 +2,6 @@
 
 namespace AppKit\Formulate\Components;
 
-use AppKit\Formulate\Components\Concerns\InheritsAttributes;
 use AppKit\Formulate\Facades\Formulate;
 use AppKit\Formulate\FormulateComponentAttributeBag;
 use Illuminate\View\Component;
