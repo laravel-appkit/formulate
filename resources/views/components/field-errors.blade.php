@@ -1,3 +1,5 @@
-@if (isset($errors) && $errors->has($field->name))
-<div class="{{ config('formulate.classes.field_error') }}">{{ $errors->first($field->name) }}</div>
-@endif
+<div class="{{ config('formulate.classes.field_error') }}">
+    @if (isset($errors))
+        {{ $errors->first($field->name) }}
+    @endif
+</div>
