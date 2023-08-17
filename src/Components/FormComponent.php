@@ -45,7 +45,7 @@ class FormComponent extends Component
                 $requestClassName = $this->routeDetails->getRequestClass();
 
                 if ($requestClassName) {
-                    $requestClass = new $requestClassName;
+                    $requestClass = new $requestClassName();
 
                     if (method_exists($requestClass, 'rules')) {
                         $this->rules = $requestClass->rules();
