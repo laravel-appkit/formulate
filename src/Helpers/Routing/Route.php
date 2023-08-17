@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Route as RouteFacade;
 use ReflectionClass;
 
 class Route
@@ -31,6 +32,13 @@ class Route
      * @var Collection
      */
     protected Collection $params;
+
+    /**
+     * The middleware that are applied to the route
+     *
+     * @var array
+     */
+    protected array $middleware = [];
 
     public function __construct(public string $routeName)
     {
@@ -66,6 +74,9 @@ class Route
                     $parameter->isOptional(),
                 ));
             }
+
+            // gather the middleware that are applied to this route
+            $this->middleware = RouteFacade::gatherRouteMiddleware($this->route);
         }
     }
 
@@ -142,5 +153,16 @@ class Route
     public function getDefaultHttpMethod()
     {
         return app('router')->getRoutes()->getByName($this->routeName)->methods[0];
+    }
+
+    public function supportPrecognition()
+    {
+        $precognitionClass = 'Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests';
+
+        if (class_exists($precognitionClass) && in_array($precognitionClass, $this->middleware)) {
+            return true;
+        }
+
+        return false;
     }
 }

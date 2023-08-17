@@ -10,10 +10,13 @@ use Illuminate\View\Component;
 
 class FormComponent extends Component
 {
+    public ?Route $routeDetails = null;
+
     public function __construct(
         public string $action = '',
         public ?string $method = null,
         public ?string $route = null,
+        public array $rules = [],
         ?array $routeParams = null,
         array | Model $data = []
     ) {
@@ -27,15 +30,27 @@ class FormComponent extends Component
 
         if (!empty($route)) {
             // get the route details
-            $routeDetails = new Route($route);
+            $this->routeDetails = new Route($route);
 
             // we have a route, lets get the action from the url
-            $this->action = $routeDetails->createRouteUrlWithPossibleDefaultBindings($routeParams, $data);
+            $this->action = $this->routeDetails->createRouteUrlWithPossibleDefaultBindings($routeParams, $data);
 
             // if we don't already have a method
             if (empty($this->method)) {
                 // use the first available method
-                $this->method = $routeDetails->getDefaultHttpMethod();
+                $this->method = $this->routeDetails->getDefaultHttpMethod();
+            }
+
+            if (empty($rules)) {
+                $requestClassName = $this->routeDetails->getRequestClass();
+
+                if ($requestClassName) {
+                    $requestClass = new $requestClassName;
+
+                    if (method_exists($requestClass, 'rules')) {
+                        $this->rules = $requestClass->rules();
+                    }
+                }
             }
         }
     }

@@ -37,4 +37,16 @@ abstract class BaseComponent extends Component
             return view($this->viewName(), Formulate::applyComponentMiddleware($this, $data))->render();
         };
     }
+
+    public function shouldRenderComponent()
+    {
+        return true;
+    }
+
+    public function shouldRender()
+    {
+        $componentName = class_basename($this);
+
+        return Formulate::applyMiddleware($this->shouldRenderComponent(), 'shouldRender' . $componentName);
+    }
 }

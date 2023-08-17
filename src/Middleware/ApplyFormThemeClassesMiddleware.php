@@ -5,7 +5,7 @@ namespace AppKit\Formulate\Middleware;
 use AppKit\Formulate\FormulateComponentAttributeBag;
 use Closure;
 
-class ApplyFormThemeClassesMiddleware
+class ApplyFormThemeClassesMiddleware extends BaseMiddleware
 {
     public function getInputComponentAttributes(FormulateComponentAttributeBag $attributes, Closure $next)
     {

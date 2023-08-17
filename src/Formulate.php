@@ -35,7 +35,7 @@ class Formulate
      * The current form
      * @var FormComponent
      */
-    protected FormComponent $form;
+    protected ?FormComponent $form = null;
 
     /**
      * A collection of fields that are used within the current form
@@ -122,6 +122,11 @@ class Formulate
         $this->formData = $data;
     }
 
+    public function getForm()
+    {
+        return $this->form;
+    }
+
     /**
      * Return the current form data
      *
@@ -157,9 +162,9 @@ class Formulate
      * Get the current field
      *
      */
-    public function getCurrentField(): InputComponent
+    public function getCurrentField()
     {
-        return $this->currentField;
+        return $this->fields->where('name', $this->currentField)->first();
     }
 
     /**
@@ -280,7 +285,9 @@ class Formulate
         $pipeline = new Pipeline(app());
 
         // we don't need all of the middleware to have each method, so we need to filter
-        $filteredMiddleware = collect($this->middleware)->filter(function ($middleware) use ($method) {
+        $filteredMiddleware = collect($this->middleware)->filter(function ($middleware) {
+            return app($middleware)->shouldApply();
+        })->filter(function ($middleware) use ($method) {
             return method_exists($middleware, $method);
         })->toArray();
 

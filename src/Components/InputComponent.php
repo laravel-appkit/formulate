@@ -35,9 +35,13 @@ class InputComponent extends BaseComponent
         public string $type = 'text',
         public mixed $value = null,
         public bool $required = false,
+        public array $rules = [],
+        public bool $multiple = false
     ) {
         // store an instance of this class as the field, this is passed to child components
         $this->field = $this;
+
+        $this->form = Formulate::getForm();
 
         // create instances of the necessary attribute bags
         $this->groupAttributes = $this->newAttributeBag();
@@ -78,6 +82,14 @@ class InputComponent extends BaseComponent
         } else {
             // for all other fields, we just get the value from the service provider
             $this->value = Formulate::getFieldValue($this->name, $value);
+        }
+
+        if (empty($this->rules) && !empty($this->form->rules) && array_key_exists($this->name, $this->form->rules)) {
+            $this->rules = $this->form->rules[$this->name];
+        }
+
+        if (!$this->required && in_array('required', $this->rules)) {
+            $this->required = true;
         }
     }
 

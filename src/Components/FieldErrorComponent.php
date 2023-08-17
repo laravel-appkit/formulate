@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ViewErrorBag;
 use Illuminate\View\Component;
 
-class FieldErrorComponent extends Component
+class FieldErrorComponent extends BaseComponent
 {
     public function __construct(public InputComponent $field)
     {
@@ -17,9 +17,9 @@ class FieldErrorComponent extends Component
      *
      * @return \Illuminate\View\View|\Closure|string
      */
-    public function render()
+    public function viewName()
     {
-        return view('formulate::components.field-errors');
+        return 'formulate::components.field-errors';
     }
 
     /**
@@ -27,7 +27,7 @@ class FieldErrorComponent extends Component
      *
      * @return bool
      */
-    public function shouldRender()
+    public function shouldRenderComponent()
     {
         // get the errors that are being shared with the View
         $errors = View::shared('errors', new ViewErrorBag());
