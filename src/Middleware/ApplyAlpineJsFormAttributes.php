@@ -16,11 +16,7 @@ class ApplyAlpineJsFormAttributes extends BaseMiddleware
         if ($attributes->has('x-data') && $attributes->get('x-data') === true) {
             // generate the x-data
             $data = Formulate::getFields()->mapWithKeys(function ($field) {
-                if ($field->multiple) {
-                    return [$field->name => $this->field->value ?? ['']];
-                }
-
-                return [$field->name => $field->value ?? ''];
+                return [$field->name => $field->value ?? $field->getDefaultValue()];
             });
 
             $attributes->set('x-data', $data);

@@ -140,6 +140,15 @@ class InputComponent extends BaseComponent
         })->toArray();
     }
 
+    public function getDefaultValue()
+    {
+        if ($this->multiple) {
+            return [''];
+        }
+
+        return '';
+    }
+
     /**
      * Define the view name that is used for the component
      *
