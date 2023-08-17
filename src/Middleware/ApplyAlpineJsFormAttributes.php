@@ -5,8 +5,6 @@ namespace AppKit\Formulate\Middleware;
 use AppKit\Formulate\Facades\Formulate;
 use AppKit\Formulate\FormulateComponentAttributeBag;
 use Closure;
-use Illuminate\Support\Js;
-use Illuminate\Support\Str;
 
 class ApplyAlpineJsFormAttributes extends BaseMiddleware
 {

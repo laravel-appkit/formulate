@@ -3,8 +3,6 @@
 namespace AppKit\Formulate\Middleware;
 
 use AppKit\Formulate\Facades\Formulate;
-use AppKit\Formulate\FormulateComponentAttributeBag;
-use Closure;
 
 abstract class BaseMiddleware
 {
