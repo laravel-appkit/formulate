@@ -6,6 +6,7 @@ use AppKit\Formulate\Facades\Formulate as FormulateFacade;
 use AppKit\Formulate\Middleware\ApplyAlpineJsFormAttributes;
 use AppKit\Formulate\Middleware\ApplyFormThemeClassesMiddleware;
 use AppKit\Formulate\Middleware\PrecognitionMiddleware;
+use AppKit\Formulate\Middleware\RepeatingFieldsMiddleware;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -47,5 +48,6 @@ class FormulateServiceProvider extends ServiceProvider
         FormulateFacade::registerMiddleware(ApplyFormThemeClassesMiddleware::class);
         FormulateFacade::registerMiddleware(ApplyAlpineJsFormAttributes::class);
         FormulateFacade::registerMiddleware(PrecognitionMiddleware::class);
+        FormulateFacade::registerMiddleware(RepeatingFieldsMiddleware::class);
     }
 }

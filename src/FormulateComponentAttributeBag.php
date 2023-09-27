@@ -19,4 +19,10 @@ class FormulateComponentAttributeBag extends ComponentAttributeBag
 
         $this->attributes[$attribute] = $value;
     }
+
+    public function addClass($class)
+    {
+        $classes = $this->get('class', '');
+        $this->set('class', $classes . ' ' . $class);
+    }
 }

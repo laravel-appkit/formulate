@@ -9,6 +9,7 @@ use AppKit\Formulate\Components\FormComponent;
 use AppKit\Formulate\Components\InputComponent;
 use AppKit\Formulate\Components\LabelComponent;
 use AppKit\Formulate\Components\OptionComponent;
+use AppKit\Formulate\Components\RepeatingFieldComponent;
 use AppKit\Formulate\Components\SelectComponent;
 use AppKit\Formulate\Components\TextareaComponent;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -90,6 +91,7 @@ class Formulate
             'input' => InputComponent::class,
             'label' => LabelComponent::class,
             'option' => OptionComponent::class,
+            'repeating-field' => RepeatingFieldComponent::class,
             'select' => SelectComponent::class,
             'textarea' => TextareaComponent::class,
         ];

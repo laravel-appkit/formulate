@@ -27,6 +27,8 @@ class InputComponent extends BaseComponent
      */
     public ComponentAttributeBag $labelAttributes;
 
+    // public ?RepeatingFieldComponent $repeater = null;
+
     public function __construct(
         public string $name,
         public bool $checked = false,
