@@ -9,7 +9,7 @@ class RepeatingFieldsMiddleware extends BaseMiddleware
 {
     public function shouldApply()
     {
-        return $this->field->multiple;
+        return $this->field && $this->field->multiple;
     }
 
     public function getInputComponentAttributes(FormulateComponentAttributeBag $attributes, Closure $next)
