@@ -2,6 +2,7 @@
 
 namespace AppKit\Formulate;
 
+use AppKit\Formulate\Components\ButtonComponent;
 use AppKit\Formulate\Components\CheckablesComponent;
 use AppKit\Formulate\Components\FieldErrorComponent;
 use AppKit\Formulate\Components\FieldGroupComponent;
@@ -84,6 +85,7 @@ class Formulate
     {
         // define the blade components that this package exposes
         $components = [
+            'button' => ButtonComponent::class,
             'checkables' => CheckablesComponent::class,
             'field-errors' => FieldErrorComponent::class,
             'field-group' => FieldGroupComponent::class,

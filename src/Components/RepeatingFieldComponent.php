@@ -13,6 +13,8 @@ class RepeatingFieldComponent extends BaseComponent
 
     public FormulateComponentAttributeBag $labelAttributes;
 
+    public string $repeaterId;
+
     /**
      * Initialise the label component
      *
@@ -24,6 +26,8 @@ class RepeatingFieldComponent extends BaseComponent
         $this->labelAttributes = $this->field->labelAttributes->only('class');
 
         $this->label = Str::of($field->label)->plural()->toString();
+
+        $this->repeaterId = 'repeater' . uniqid();
     }
 
     /**

@@ -22,7 +22,7 @@ class RepeatingFieldsMiddleware extends BaseMiddleware
 
     public function getFieldGroupComponentAttributes(FormulateComponentAttributeBag $attributes, Closure $next)
     {
-        $attributes->set('x-ref', 'repeater');
+        // $attributes->set('x-ref', 'repeater');
 
         return $next($attributes);
     }
