@@ -1,16 +1,29 @@
 <fieldset x-ref="{{ $repeaterId }}">
-    <legend {!! $labelAttributes !!}>{{ $label }}</legend>
+    <legend {!! $repeaterLabelAttributes !!}>{{ $label }}</legend>
 
-    <template x-for="(_, index) in form.{{ $field->name }}" :key='index'>
-        <div>
-            {{ $slot }}
-        </div>
-    </template>
+    <x-formulate-reorderable-list>
 
-    <x-formulate-button
-        type="button"
-        class="mb-4"
-        label="Add Another {{ $field->label }}"
-        @click="form.{{ $field->name }}.push(''); $nextTick(() => { $refs.{{ $repeaterId }}.querySelector('#link_' + (form.{{ $field->name }}.length - 1)).focus(); });"
-    />
+        <template x-for="(_, index) in form.{{ $field->name }}" :key='index'>
+
+            <x-formulate-reorderable-item source="form.{{ $field->name }}">
+
+                    <x-formulate-reorderable-handle />
+
+                    <div class="items-center flex-auto">
+                        {{ $slot }}
+                    </div>
+
+                    <div class="flex items-center">
+                        <x-formulate-reorderable-buttons source="form.{{ $field->name }}" />
+
+                        <x-formulate-repeating-field-remove-button :field="$field" />
+                    </div>
+
+            </x-formulate-reorderable-item>
+
+        </template>
+
+    </x-formulate-reorderable-list>
+
+    <x-formulate-repeating-field-add-button :field="$field" :repeaterId="$repeaterId" />
 </fieldset>

@@ -37,6 +37,7 @@ class ButtonComponent extends BaseComponent
         'tracking-widest',
         'transition',
         'uppercase',
+        'disabled:opacity-50',
     ];
 
     /**

@@ -10,7 +10,7 @@ class RepeatingFieldComponent extends BaseComponent
 {
     public string $label;
 
-    public FormulateComponentAttributeBag $labelAttributes;
+    public FormulateComponentAttributeBag $repeaterLabelAttributes;
 
     public string $repeaterId;
 
@@ -22,7 +22,9 @@ class RepeatingFieldComponent extends BaseComponent
      */
     public function __construct(public InputComponent $field)
     {
-        $this->labelAttributes = $this->field->labelAttributes->only('class');
+        $existingLabelAttributes = $this->field->labelAttributes->get('class');
+
+        $this->repeaterLabelAttributes = new FormulateComponentAttributeBag(['class' => $existingLabelAttributes]);
 
         $this->label = Str::of($field->label)->plural()->toString();
 

@@ -10,7 +10,13 @@ use AppKit\Formulate\Components\FormComponent;
 use AppKit\Formulate\Components\InputComponent;
 use AppKit\Formulate\Components\LabelComponent;
 use AppKit\Formulate\Components\OptionComponent;
+use AppKit\Formulate\Components\ReorderableButtonsComponent;
+use AppKit\Formulate\Components\ReorderableHandleComponent;
+use AppKit\Formulate\Components\ReorderableItemComponent;
+use AppKit\Formulate\Components\ReorderableListComponent;
+use AppKit\Formulate\Components\RepeatingFieldAddButtonComponent;
 use AppKit\Formulate\Components\RepeatingFieldComponent;
+use AppKit\Formulate\Components\RepeatingFieldRemoveButtonComponent;
 use AppKit\Formulate\Components\SelectComponent;
 use AppKit\Formulate\Components\TextareaComponent;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -96,6 +102,12 @@ class Formulate
             'repeating-field' => RepeatingFieldComponent::class,
             'select' => SelectComponent::class,
             'textarea' => TextareaComponent::class,
+            'reorderable-list' => ReorderableListComponent::class,
+            'reorderable-item' => ReorderableItemComponent::class,
+            'reorderable-handle' => ReorderableHandleComponent::class,
+            'reorderable-buttons' => ReorderableButtonsComponent::class,
+            'repeating-field-remove-button' => RepeatingFieldRemoveButtonComponent::class,
+            'repeating-field-add-button' => RepeatingFieldAddButtonComponent::class,
         ];
 
         // loop through them
