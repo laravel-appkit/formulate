@@ -2,7 +2,6 @@
 
 namespace AppKit\Formulate\Components;
 
-use AppKit\Formulate\Components\Concerns\InheritsAttributes;
 use Illuminate\View\Component;
 
 class RepeatingFieldAddButtonComponent extends BaseComponent
