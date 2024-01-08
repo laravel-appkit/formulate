@@ -12,7 +12,7 @@ class ButtonComponent extends BaseComponent
         'border-transparent',
         'border',
         'dark:active:bg-gray-300',
-        'dark:bg-gray-200',
+        'dark:bg-gray-400',
         'dark:focus:bg-white',
         'dark:focus:ring-offset-gray-800',
         'dark:hover:bg-white',

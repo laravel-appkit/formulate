@@ -1,4 +1,4 @@
-<label for="{{ $field->id }}" {!! $attributes !!}>
+<label for="{{ $field->id }}" {!! $attributes->class(['sr-only' => $field->multiple]) !!}>
     {{ $field->label }}
 
     @if ($field->required && !config('formulate.highlight_optional_fields', false))

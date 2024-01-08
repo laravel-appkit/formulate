@@ -6,22 +6,20 @@ use AppKit\Formulate\Facades\Formulate;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 
-class CheckablesComponent extends Component
+class CheckablesComponent extends InputComponent
 {
-    public $checked = false;
-    public $field;
-    public $groupAttributes;
-    public $id;
-    public $label;
-    public $labelAttributes;
-    public $name;
-    public $type;
-    public $value;
-    public $options;
+    public function __construct(
+        public string $name,
+        public string $type,
+        public ?string $id = null,
+        public ?string $label = null,
+        public mixed $value = null,
+        public array | EloquentCollection | SupportCollection $options = [],
+    ) {
+        // the InputComponent will sort out most of the stuff for us
+        parent::__construct($name, false, $id, $label, 'select', $value);
 
-    public function __construct($name, $type, $id = null, $label = null, $options = [])
-    {
-        $this->field = $this;
+        // $this->field = $this;
         $this->id = $id;
         $this->label = $label;
         $this->name = $name;

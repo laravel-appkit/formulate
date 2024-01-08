@@ -2,6 +2,7 @@
 
 namespace AppKit\Formulate;
 
+use AppKit\Formulate\Components\BlankComponent;
 use AppKit\Formulate\Components\ButtonComponent;
 use AppKit\Formulate\Components\CheckablesComponent;
 use AppKit\Formulate\Components\FieldErrorComponent;
@@ -108,6 +109,7 @@ class Formulate
             'reorderable-buttons' => ReorderableButtonsComponent::class,
             'repeating-field-remove-button' => RepeatingFieldRemoveButtonComponent::class,
             'repeating-field-add-button' => RepeatingFieldAddButtonComponent::class,
+            'blank' => BlankComponent::class,
         ];
 
         // loop through them
@@ -253,25 +255,18 @@ class Formulate
         // get the name
         $name = $field->name;
 
-        // find out how many instances of that name we already have
-        $index = $this->fields->where('name', $name)->count();
-
         // check if this is an array type field based on the name
-        $array = false;
         if (str_contains($name, '[]')) {
-            $array = true;
-
             // remove the brackets from the end of the field name
             $name = str_replace('[]', '', $name);
         }
 
-        // if the index is more than one, or if its an array, the name is appended with the index
-        if ($index != 1 || $array) {
-            return $name . '-' . $index;
-        }
+        return self::id($name);
+    }
 
-        // otherwise, we just use the name
-        return $name;
+    public function id($name)
+    {
+        return app(Id::class)->get($name);
     }
 
     public function registerMiddleware($middleware)

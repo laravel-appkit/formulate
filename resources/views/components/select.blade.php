@@ -1,4 +1,4 @@
-<x-field-group :field="$field">
+<x-formulate-field-group :field="$field">
     <select name="{{ $name }}" id="{{ $id }}" {!! $attributes !!}>
         @if (!empty($options))
             @foreach ($options as $value => $title)
@@ -8,4 +8,4 @@
         {{ $slot }}
         @endif
     </select>
-</x-field-group>
+</x-formulate-field-group>

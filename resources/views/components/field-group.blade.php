@@ -1,9 +1,25 @@
-<x-dynamic-component component="{{ Formulate::getDynamicComponentName('repeating-field') }}" :field="$field">
+<x-dynamic-component component="{{ Formulate::getDynamicComponentName('repeating-field') }}" :$field>
     <div {!! $attributes !!}>
-            <x-dynamic-component component="{{ Formulate::getDynamicComponentName('label') }}" :field="$field" />
+            <x-formulate-label :$field />
 
-            {{ $slot }}
+            <div class="flex w-full items-center">
+                @if ($field->multiple && $field->orderable)
+                <x-formulate-reorderable-handle class="flex-none" />
+                @endif
 
-            <x-dynamic-component component="{{ Formulate::getDynamicComponentName('field-errors') }}" :field="$field" />
+                <div class="flex-auto">{{ $slot }}</div>
+
+                @if ($field->multiple)
+                <div class="flex-none flex">
+                    @if ($field->orderable)
+                    <x-formulate-reorderable-buttons source="form.{{ $field->name }}" />
+                    @endif
+
+                    <x-formulate-repeating-field-remove-button :$field />
+                </div>
+                @endif
+            </div>
+
+            <x-formulate-field-errors :$field />
     </div>
 </x-dynamic-component>

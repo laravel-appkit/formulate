@@ -3,6 +3,7 @@
 namespace AppKit\Formulate;
 
 use AppKit\Formulate\Facades\Formulate as FormulateFacade;
+use AppKit\Formulate\Id;
 use AppKit\Formulate\Middleware\ApplyAlpineJsFormAttributes;
 use AppKit\Formulate\Middleware\ApplyFormThemeClassesMiddleware;
 use AppKit\Formulate\Middleware\PrecognitionMiddleware;
@@ -40,6 +41,14 @@ class FormulateServiceProvider extends ServiceProvider
         // Register the main class to use with the facade
         $this->app->singleton('formulate', function () {
             return new Formulate();
+        });
+
+        $this->app->singleton(Id::class, function () {
+            return new Id();
+        });
+
+        Blade::directive('id', function (string $expression) {
+            return "app('". Id::class . "')->get($expression)";
         });
 
         // Register the blade components

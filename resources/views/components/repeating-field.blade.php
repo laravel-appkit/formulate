@@ -1,29 +1,19 @@
 <fieldset x-ref="{{ $repeaterId }}">
-    <legend {!! $repeaterLabelAttributes !!}>{{ $label }}</legend>
+    <legend class="{!! $labelAttributes !!}">{{ $label }}</legend>
 
-    <x-formulate-reorderable-list>
+    <x-dynamic-component component="{{ $field->orderable ? 'formulate-reorderable-list' : 'formulate-blank' }}" source="form.{{ $field->name }}" key="index">
 
         <template x-for="(_, index) in form.{{ $field->name }}" :key='index'>
 
-            <x-formulate-reorderable-item source="form.{{ $field->name }}">
+            <x-dynamic-component component="{{ $field->orderable ? 'formulate-reorderable-item' : 'formulate-blank' }}" source="form.{{ $field->name }}">
 
-                    <x-formulate-reorderable-handle />
+                {{ $slot }}
 
-                    <div class="items-center flex-auto">
-                        {{ $slot }}
-                    </div>
-
-                    <div class="flex items-center">
-                        <x-formulate-reorderable-buttons source="form.{{ $field->name }}" />
-
-                        <x-formulate-repeating-field-remove-button :field="$field" />
-                    </div>
-
-            </x-formulate-reorderable-item>
+            </x-dynamic-component>
 
         </template>
 
-    </x-formulate-reorderable-list>
+    </x-dynamic-component>
 
-    <x-formulate-repeating-field-add-button :field="$field" :repeaterId="$repeaterId" />
+    <x-formulate-repeating-field-add-button :$field :$repeaterId />
 </fieldset>

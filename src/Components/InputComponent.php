@@ -38,7 +38,9 @@ class InputComponent extends BaseComponent
         public mixed $value = null,
         public bool $required = false,
         public array $rules = [],
-        public bool $multiple = false
+        public bool $multiple = false,
+        public bool $orderable = false,
+        public bool $ignoreFieldGroup = false,
     ) {
         // store an instance of this class as the field, this is passed to child components
         $this->field = $this;

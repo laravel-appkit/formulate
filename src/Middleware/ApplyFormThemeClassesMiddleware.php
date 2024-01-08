@@ -17,6 +17,16 @@ class ApplyFormThemeClassesMiddleware extends BaseMiddleware
         return $next($attributes);
     }
 
+    public function getSelectComponentAttributes(FormulateComponentAttributeBag $attributes, Closure $next)
+    {
+        if (!$attributes->has('class')) {
+            $attributes->set('class', config('formulate.classes.field'));
+        }
+
+        // go to the next middleware
+        return $next($attributes);
+    }
+
     public function getFieldGroupComponentAttributes(FormulateComponentAttributeBag $attributes, Closure $next)
     {
         if (!$attributes->has('class')) {

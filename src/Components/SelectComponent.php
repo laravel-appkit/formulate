@@ -47,12 +47,12 @@ class SelectComponent extends InputComponent
     }
 
     /**
-     * Get the view / contents that represent the component.
+     * Define the view name that is used for the component
      *
-     * @return \Illuminate\View\View|\Closure|string
+     * @return string
      */
-    public function render()
+    protected function viewName()
     {
-        return view('formulate::components.select');
+        return 'formulate::components.select';
     }
 }
