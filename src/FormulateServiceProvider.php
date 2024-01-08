@@ -3,7 +3,6 @@
 namespace AppKit\Formulate;
 
 use AppKit\Formulate\Facades\Formulate as FormulateFacade;
-use AppKit\Formulate\Id;
 use AppKit\Formulate\Middleware\ApplyAlpineJsFormAttributes;
 use AppKit\Formulate\Middleware\ApplyFormThemeClassesMiddleware;
 use AppKit\Formulate\Middleware\PrecognitionMiddleware;

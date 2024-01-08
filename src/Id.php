@@ -2,7 +2,8 @@
 
 namespace AppKit\Formulate;
 
-class Id {
+class Id
+{
     /**
      * The allocation of ids by key
      *
@@ -23,7 +24,8 @@ class Id {
      * @param string $key
      * @return string
      */
-    function get($key) {
+    public function get($key)
+    {
         // check if we have the key in the current block
         if ($this->stackValue($key) !== false) {
             // we do, but does it have a value
@@ -52,7 +54,8 @@ class Id {
      * @param string $key
      * @return string
      */
-    function generate($key) {
+    public function generate($key)
+    {
         // check if we don't already have an allocation for this key
         if (!array_key_exists($key, $this->allocation)) {
             // set the allocation to be 0 initially
@@ -78,7 +81,8 @@ class Id {
         return $id;
     }
 
-    public function stackValue($key) {
+    public function stackValue($key)
+    {
         foreach (array_reverse($this->blockStack) as $block) {
             if (array_key_exists($key, $block)) {
                 return $block[$key];
@@ -94,7 +98,8 @@ class Id {
      * @param string ...$keys
      * @return void
      */
-    function startBlock(...$keys) {
+    public function startBlock(...$keys)
+    {
         // create an array to store this stack
         $block = [];
 
@@ -113,7 +118,8 @@ class Id {
      *
      * @return void
      */
-    function endBlock() {
+    public function endBlock()
+    {
         // remove the last item from the stack
         array_pop($this->blockStack);
     }
