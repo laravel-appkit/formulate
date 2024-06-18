@@ -10,7 +10,7 @@ class ApplyFormThemeClassesMiddleware extends BaseMiddleware
     public function getInputComponentAttributes(FormulateComponentAttributeBag $attributes, Closure $next)
     {
         if (!$attributes->has('class')) {
-            $attributes->set('class', config('formulate.classes.field'));
+            // $attributes->set('class', config('formulate.classes.field'));
         }
 
         // go to the next middleware

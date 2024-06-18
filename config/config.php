@@ -11,11 +11,18 @@ return [
     'highlight_optional_fields' => false,
 
     'classes' => [
-        'field_error' => 'mt-2 text-red-800 border-red-800',
-        'field' => 'border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block w-full',
-        'form_error' => 'mb-4 font-bold text-white bg-red-800 p-3 rounded-md',
-        'group' => 'mb-4',
-        'label' => 'block font-medium text-gray-700 dark:text-white mb-1',
-        'required' => 'text-red-800',
+    //     'field_error' => 'mt-2 text-red-800 border-red-800',
+    //     'field' => 'border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block w-full',
+    //     'form_error' => 'mb-4 font-bold text-white bg-red-800 p-3 rounded-md',
+    //     'group' => 'mb-4',
+    //     'label' => 'block font-medium text-gray-700 dark:text-white mb-1',
+    //     'required' => 'text-red-800',
+
+        'field_error' => '',
+        'field' => '',
+        'form_error' => '',
+        'group' => '',
+        'label' => '',
+        'required' => '',
     ],
 ];
