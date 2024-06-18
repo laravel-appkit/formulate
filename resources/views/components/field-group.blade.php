@@ -1,4 +1,4 @@
-<x-dynamic-component component="{{ Formulate::getDynamicComponentName('repeating-field') }}" :$field>
+{{-- <x-dynamic-component component="{{ Formulate::getDynamicComponentName('repeating-field') }}" :$field>
     <div {!! $attributes !!}>
             <x-formulate-label :$field />
 
@@ -22,4 +22,10 @@
 
             <x-formulate-field-errors :$field />
     </div>
+</x-dynamic-component> --}}
+
+<x-dynamic-component component="{{ Formulate::getDynamicComponentName('repeating-field') }}" :$field>
+    <x-appkit::field-group label="{{ $field->label }}" help="" error="Something went wrong">
+        {{ $slot }}
+    </x-appkit::field-group>
 </x-dynamic-component>

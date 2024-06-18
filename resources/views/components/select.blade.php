@@ -1,8 +1,8 @@
-<x-formulate-field-group :field="$field">
+<x-formulate-field-group :$field>
     <x-appkit::select name="{{ $name }}" id="{{ $id }}" {{ $attributes }}>
         @if (!empty($options))
             @foreach ($options as $value => $title)
-            <x-dynamic-component component="{{ Formulate::getDynamicComponentName('option') }}" :value="$value">{{ $title }}</x-dynamic-component>
+            <x-formulate-option :$value>{{ $title }}</x-formulate-option>
             @endforeach
         @else
         {{ $slot }}

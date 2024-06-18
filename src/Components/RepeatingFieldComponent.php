@@ -21,7 +21,7 @@ class RepeatingFieldComponent extends BaseComponent
      */
     public function __construct(public InputComponent $field)
     {
-        $this->labelAttributes = $this->field->labelAttributes->get('class');
+        $this->labelAttributes = '';
 
         $this->label = Str::of($field->label)->plural()->toString();
 
