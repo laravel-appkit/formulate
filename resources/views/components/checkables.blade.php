@@ -1,20 +1,23 @@
-<fieldset class="mb-4">
-    <legend class="{!! $labelAttributes !!}">{{ $label }}</legend>
+{{-- {{ $type == 'checkbox' ? '[]' : '' }} --}}
 
-    @foreach ($options as $value => $title)
-    @php
-        app(\AppKit\Formulate\Id::class)->startBlock($name);
-    @endphp
+<fieldset>
+    <legend class="font-medium text-gray-900 leading-6 dark:text-white">{{ $label }}</legend>
 
-    <div class="{{ $loop->last ? '' : 'mb-2 ' }}flex items-center">
-        <x-formulate-input type="{{ $type }}" name="{{ $name }}{{ $type == 'checkbox' ? '[]' : '' }}" :label="$title" :value="$value" ignoreFieldGroup />
-        <label for="" class="ml-2">{{ $title }}</label>
+    <div class="space-y-2">
+        @foreach ($options as $value => $label)
+        @php
+            app(\AppKit\Formulate\Id::class)->startBlock($label);
+            $id = app(\AppKit\Formulate\Id::class)->get($label);
+        @endphp
+        <div class="flex items-center">
+            <x-formulate-input :$type :$name :$id :$label :$value ignoreFieldGroup />
+            <x-appkit::label :for="$id" :$label class="ml-2" />
+        </div>
+        @endforeach
+        @php
+            app(\AppKit\Formulate\Id::class)->endBlock();
+        @endphp
     </div>
-
-    @endforeach
-    @php
-        app(\AppKit\Formulate\Id::class)->endBlock();
-    @endphp
 
     @if (isset($errors) && $errors->has($name))
     <div class="{{ config('formulate.classes.field_error') }}">{{ $errors->first($name) }}</div>
