@@ -41,6 +41,7 @@ class InputComponent extends BaseComponent
         public bool $multiple = false,
         public bool $orderable = false,
         public bool $ignoreFieldGroup = false,
+        public ?string $help = '',
     ) {
         // store an instance of this class as the field, this is passed to child components
         $this->field = $this;

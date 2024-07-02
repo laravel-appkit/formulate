@@ -11,5 +11,5 @@
     <div class="{{ config('formulate.classes.form_error') }}">{{ config('formulate.form_error_message') }}</div>
     @endif
 
-    {{ $slot }}
+    <div class="space-y-4">{{ $slot }}</div>
 </form>
