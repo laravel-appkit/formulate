@@ -4,7 +4,6 @@ namespace AppKit\Formulate\Components;
 
 use AppKit\Formulate\Facades\Formulate;
 use Illuminate\Support\Str;
-use Illuminate\View\ComponentAttributeBag;
 
 class Field extends BaseComponent
 {

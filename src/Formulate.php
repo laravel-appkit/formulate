@@ -6,7 +6,6 @@ use AppKit\Formulate\Components\BlankComponent;
 use AppKit\Formulate\Components\ButtonComponent;
 use AppKit\Formulate\Components\CheckablesComponent;
 use AppKit\Formulate\Components\Field;
-use AppKit\Formulate\Components\FieldComponent;
 use AppKit\Formulate\Components\FieldErrorComponent;
 use AppKit\Formulate\Components\FieldGroupComponent;
 use AppKit\Formulate\Components\FormComponent;
