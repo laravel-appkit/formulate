@@ -17,6 +17,7 @@ class FieldGroupComponent extends BaseComponent
      */
     public function __construct(public InputComponent $field)
     {
+        dd('HEREEEE');
         $this->inheritAttributes($field->groupAttributes);
     }
 

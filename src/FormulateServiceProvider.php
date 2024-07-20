@@ -57,5 +57,8 @@ class FormulateServiceProvider extends ServiceProvider
         FormulateFacade::registerMiddleware(ApplyAlpineJsFormAttributes::class);
         FormulateFacade::registerMiddleware(PrecognitionMiddleware::class);
         FormulateFacade::registerMiddleware(RepeatingFieldsMiddleware::class);
+
+        // setup the component namespace
+        Blade::componentNamespace('AppKit\\Formulate\\Components', 'formulate');
     }
 }

@@ -34,7 +34,7 @@ class PrecognitionMiddleware extends BaseMiddleware
         return $next($attributes);
     }
 
-    public function getInputComponentAttributes(FormulateComponentAttributeBag $attributes, Closure $next)
+    public function getFieldComponentAttributes(FormulateComponentAttributeBag $attributes, Closure $next)
     {
         if ($this->field->multiple) {
             $attributes->set('@change', 'form.validate(\'' . $this->field->name . '.\' + index)');

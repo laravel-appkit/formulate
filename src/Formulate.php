@@ -5,6 +5,8 @@ namespace AppKit\Formulate;
 use AppKit\Formulate\Components\BlankComponent;
 use AppKit\Formulate\Components\ButtonComponent;
 use AppKit\Formulate\Components\CheckablesComponent;
+use AppKit\Formulate\Components\Field;
+use AppKit\Formulate\Components\FieldComponent;
 use AppKit\Formulate\Components\FieldErrorComponent;
 use AppKit\Formulate\Components\FieldGroupComponent;
 use AppKit\Formulate\Components\FormComponent;
@@ -94,10 +96,11 @@ class Formulate
         $components = [
             'button' => ButtonComponent::class,
             'checkables' => CheckablesComponent::class,
+            // 'field' => Field::class,
             'field-errors' => FieldErrorComponent::class,
             'field-group' => FieldGroupComponent::class,
             'form' => FormComponent::class,
-            'input' => InputComponent::class,
+            // 'input' => InputComponent::class,
             'label' => LabelComponent::class,
             'option' => OptionComponent::class,
             'repeating-field' => RepeatingFieldComponent::class,
@@ -161,7 +164,7 @@ class Formulate
      * @param InputComponent $field
      * @return void
      */
-    public function registerField(InputComponent $field)
+    public function registerField($field)
     {
         $this->fields[] = $field;
     }
@@ -250,7 +253,7 @@ class Formulate
      * @param InputComponent $field
      * @return string
      */
-    public function generateFieldId(InputComponent $field)
+    public function generateFieldId($field)
     {
         // get the name
         $name = $field->name;
