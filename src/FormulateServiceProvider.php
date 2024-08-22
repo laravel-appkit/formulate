@@ -53,10 +53,10 @@ class FormulateServiceProvider extends ServiceProvider
         // Register the blade components
         FormulateFacade::registerComponents(config('formulate.component_prefix', ''));
 
-        FormulateFacade::registerMiddleware(ApplyFormThemeClassesMiddleware::class);
-        FormulateFacade::registerMiddleware(ApplyAlpineJsFormAttributes::class);
-        FormulateFacade::registerMiddleware(PrecognitionMiddleware::class);
-        FormulateFacade::registerMiddleware(RepeatingFieldsMiddleware::class);
+        // FormulateFacade::registerMiddleware(ApplyFormThemeClassesMiddleware::class);
+        // FormulateFacade::registerMiddleware(ApplyAlpineJsFormAttributes::class);
+        // FormulateFacade::registerMiddleware(PrecognitionMiddleware::class);
+        // FormulateFacade::registerMiddleware(RepeatingFieldsMiddleware::class);
 
         // setup the component namespace
         Blade::componentNamespace('AppKit\\Formulate\\Components', 'formulate');

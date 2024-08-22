@@ -12,6 +12,8 @@ class Input extends BaseComponent
         public ?string $error = '',
         public ?string $help = '',
         public ?string $label = '',
+        public bool $multiple = false,
+        public bool $orderable = false,
     ) {
         // if we don't have a label, then we need to generate one
         // TODO: Make this into a closure that userland code can modify to give custom logic

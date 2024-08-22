@@ -5,7 +5,7 @@ namespace AppKit\Formulate\Components;
 use AppKit\Formulate\Facades\Formulate;
 use Illuminate\View\Component;
 
-class OptionComponent extends Component
+class Option extends Component
 {
     /**
      * If the current option in the select is selected

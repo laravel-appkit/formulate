@@ -5,20 +5,19 @@ namespace AppKit\Formulate\Components;
 use AppKit\Formulate\Components\Concerns\InheritsAttributes;
 use Illuminate\View\Component;
 
-class FieldGroupComponent extends BaseComponent
+class FieldGroup extends BaseComponent
 {
-    use InheritsAttributes;
+    // use InheritsAttributes;
 
     /**
      * Initialise the field group component
      *
-     * @param InputComponent $field
+     * @param Input $field
      * @return void
      */
-    public function __construct(public InputComponent $field)
+    public function __construct(public ?string $name = '')
     {
-        dd('HEREEEE');
-        $this->inheritAttributes($field->groupAttributes);
+                // $this->inheritAttributes($field->groupAttributes);
     }
 
     /**

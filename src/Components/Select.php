@@ -2,7 +2,7 @@
 
 namespace AppKit\Formulate\Components;
 
-class TextareaComponent extends InputComponent
+class Select extends Input
 {
     /**
      * Get the view / contents that represent the component.
@@ -11,6 +11,6 @@ class TextareaComponent extends InputComponent
      */
     public function render()
     {
-        return view('formulate::components.textarea');
+        return view('formulate::components.select');
     }
 }

@@ -5,7 +5,7 @@ namespace AppKit\Formulate\Components;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection as SupportCollection;
 
-class SelectComponent extends InputComponent
+class SelectField extends Field
 {
     public function __construct(
         public string $name,
@@ -15,7 +15,7 @@ class SelectComponent extends InputComponent
         public array | EloquentCollection | SupportCollection $options = [],
     ) {
         // the InputComponent will sort out most of the stuff for us
-        parent::__construct($name, false, $id, $label, 'select', $value);
+        parent::__construct($name, $id, [], false, false, false, false, false, $value, 'select');
 
         // we just need to handle the options
         if ($this->options instanceof EloquentCollection) {
@@ -44,6 +44,8 @@ class SelectComponent extends InputComponent
             // if this is a standard collection, then we just turn it into an array
             $this->options = $this->options->toArray();
         }
+
+        $this->options = ['' => ''] + $this->options;
     }
 
     /**
@@ -53,6 +55,6 @@ class SelectComponent extends InputComponent
      */
     protected function viewName()
     {
-        return 'formulate::components.select';
+        return 'formulate::components.select-field';
     }
 }

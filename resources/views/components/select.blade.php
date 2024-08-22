@@ -1,11 +1,3 @@
-<x-formulate-field-group :$field>
-    <x-appkit::select name="{{ $name }}" id="{{ $id }}" {{ $attributes }}>
-        @if (!empty($options))
-            @foreach ($options as $value => $title)
-            <x-formulate-option :$value>{{ $title }}</x-formulate-option>
-            @endforeach
-        @else
-        {{ $slot }}
-        @endif
-    </x-appkit::select>
-</x-formulate-field-group>
+<x-formulate::field-group :$name :$label :$help :$error>
+    <x-formulate::select-field :$name {{ $attributes }} />
+</x-formulate::field-group>

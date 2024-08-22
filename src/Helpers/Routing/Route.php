@@ -155,7 +155,7 @@ class Route
         return app('router')->getRoutes()->getByName($this->routeName)->methods[0];
     }
 
-    public function supportPrecognition()
+    public function supportsPrecognition()
     {
         $precognitionClass = 'Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests';
 

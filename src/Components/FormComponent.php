@@ -2,9 +2,16 @@
 
 namespace AppKit\Formulate\Components;
 
+use AppKit\Formulate\Components\Customisers\Precognition\FieldErrorCustomiser;
+use AppKit\Formulate\Components\Customisers\Precognition\FormCustomiser;
+use AppKit\Formulate\Components\Customisers\Precognition\InputCustomiser;
 use AppKit\Formulate\Facades\Formulate;
 use AppKit\Formulate\FormulateComponentAttributeBag;
 use AppKit\Formulate\Helpers\Routing\Route;
+use AppKit\UI\Components\FieldError;
+use AppKit\UI\Components\Form;
+use AppKit\UI\Components\Input;
+use AppKit\UI\Facades\UI;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\Component;
 
@@ -51,6 +58,14 @@ class FormComponent extends Component
                         $this->rules = $requestClass->rules();
                     }
                 }
+            }
+
+            if ($this->routeDetails->supportsPrecognition()) {
+                UI::customiseComponents([
+                    FieldError::class => FieldErrorCustomiser::class,
+                    Form::class => FormCustomiser::class,
+                    Input::class => InputCustomiser::class,
+                ]);
             }
         }
     }

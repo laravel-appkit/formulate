@@ -1,3 +1,3 @@
-<x-dynamic-component component="{{ Formulate::getDynamicComponentName('field-group') }}" :field="$field">
-    <textarea name="{{ $name }}" id="{{ $id }}" {!! $attributes !!}>{{ $value }}</textarea>
-</x-dynamic-component>
+<x-formulate::field-group :$name :$label :$help :$error>
+    <x-formulate::textarea-field :$name {{ $attributes }} />
+</x-formulate::field-group>

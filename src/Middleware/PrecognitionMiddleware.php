@@ -12,27 +12,27 @@ class PrecognitionMiddleware extends BaseMiddleware
 {
     public function shouldApply()
     {
-        return $this->form && $this->form->routeDetails && $this->form->routeDetails->supportPrecognition() && $this->form->attributes->has('x-data');
+        return $this->form && $this->form->routeDetails && $this->form->routeDetails->supportsPrecognition() && $this->form->attributes->has('x-data');
     }
 
-    public function getFormComponentAttributes(FormulateComponentAttributeBag $attributes, Closure $next)
-    {
-        $errors = View::shared('errors', new ViewErrorBag());
+    // public function getFormComponentAttributes(FormulateComponentAttributeBag $attributes, Closure $next)
+    // {
+    //     // $errors = View::shared('errors', new ViewErrorBag());
 
-        $precognitionXData = sprintf(
-            '{%s: $form(\'%s\', \'%s\', %s)%s}',
-            'form',
-            $this->form->method,
-            $this->form->action,
-            $attributes->get('x-data'),
-            $errors->isEmpty() ? '' : '.setErrors(' . Js::from($errors->messages()) . ')'
-        );
+    //     // $precognitionXData = sprintf(
+    //     //     '{%s: $form(\'%s\', \'%s\', %s)%s}',
+    //     //     'form',
+    //     //     $this->form->method,
+    //     //     $this->form->action,
+    //     //     $attributes->get('x-data'),
+    //     //     $errors->isEmpty() ? '' : '.setErrors(' . Js::from($errors->messages()) . ')'
+    //     // );
 
-        $attributes->set('x-data', $precognitionXData);
+    //     // $attributes->set('x-data', $precognitionXData);
 
-        // pass onto the next middleware
-        return $next($attributes);
-    }
+    //     // // pass onto the next middleware
+    //     // return $next($attributes);
+    // }
 
     public function getFieldComponentAttributes(FormulateComponentAttributeBag $attributes, Closure $next)
     {
