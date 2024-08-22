@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Js;
 use Illuminate\Support\ViewErrorBag;
 
-class FormCustomiser {
+class FormCustomiser
+{
     public function __invoke(ComponentBuilder $componentBuilder, BaseComponent $instance)
     {
         // generate the x-data

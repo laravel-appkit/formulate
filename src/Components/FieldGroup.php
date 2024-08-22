@@ -17,7 +17,7 @@ class FieldGroup extends BaseComponent
      */
     public function __construct(public ?string $name = '')
     {
-                // $this->inheritAttributes($field->groupAttributes);
+        // $this->inheritAttributes($field->groupAttributes);
     }
 
     /**
