@@ -11,7 +11,7 @@ class RepeatingField extends Component
      *
      * @param string $name The name of the field being repeated
      * @param string $source The JS source of the repeat
-     * @param boolean $orderable If the items can be reordered
+     * @param bool $orderable If the items can be reordered
      */
     public function __construct(
         public string $name,
