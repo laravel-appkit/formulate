@@ -3,7 +3,6 @@
 namespace AppKit\Formulate\Components;
 
 use AppKit\Formulate\Facades\Formulate;
-use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Field extends Component
@@ -71,48 +70,6 @@ class Field extends Component
         if (!$this->required && in_array('required', $this->rules)) {
             $this->required = true;
         }
-    }
-
-    /**
-     * Set the extra attributes that the component should make available.
-     *
-     * @param  array  $attributes
-     * @return $this
-     */
-    public function withAttributes(array $attributes): self
-    {
-        // make sure that we have an attribute bag setup for everything
-        $this->attributes = $this->attributes ?: $this->newAttributeBag();
-
-        // return the instance of the component
-        return $this;
-    }
-
-    /**
-     * Filter out a list of attributes based on the prefix
-     *
-     * @param array $attributes
-     * @param null|string $prefix
-     * @return array
-     */
-    public function getPrefixedAttributes(array $attributes, ?string $prefix = null): array
-    {
-        // filter over a collection of attributes
-        return collect($attributes)->filter(function ($attributeValue, $attribute) use ($prefix) {
-            // special case if we are dealing with the null prefix
-            if (is_null($prefix)) {
-                // in which case, we want to check if the attribute contains any prefix separator
-                return !Str::of($attribute)->contains(':');
-            }
-
-            // pick this one if it starts with the correct prefix
-            return Str::of($attribute)->startsWith($prefix . ':');
-        })->mapWithKeys(function ($attributeValue, $attribute) use ($prefix) {
-            // strip the prefix off of the attribute name
-            $attribute = Str::of($attribute)->replace($prefix . ':', '')->__toString();
-
-            return [$attribute => $attributeValue];
-        })->toArray();
     }
 
     /**
