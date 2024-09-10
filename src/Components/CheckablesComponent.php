@@ -3,10 +3,11 @@
 namespace AppKit\Formulate\Components;
 
 use AppKit\Formulate\Facades\Formulate;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\View\Component;
 
-class CheckablesComponent extends InputComponent
+class CheckablesComponent extends Input
 {
     public function __construct(
         public string $name,

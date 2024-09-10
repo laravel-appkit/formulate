@@ -1,19 +1,15 @@
-<fieldset x-ref="{{ $repeaterId }}">
-    <legend class="{!! $labelAttributes !!}">{{ $label }}</legend>
+<x-appkit::repeating-group.reorder-item>
+    <div class="flex gap-2 items-center">
+        @if ($orderable)
+        <x-appkit::repeating-group.reorder-handle />
+        @endif
 
-    <x-dynamic-component component="{{ $field->orderable ? 'formulate-reorderable-list' : 'formulate-blank' }}" source="form.{{ $field->name }}" key="index">
+        <div class="flex-1">{{ $slot }}</div>
 
-        <template x-for="(_, index) in form.{{ $field->name }}" :key='index'>
+        <x-appkit::repeating-group.remove-button />
 
-            <x-dynamic-component component="{{ $field->orderable ? 'formulate-reorderable-item' : 'formulate-blank' }}" source="form.{{ $field->name }}">
-
-                {{ $slot }}
-
-            </x-dynamic-component>
-
-        </template>
-
-    </x-dynamic-component>
-
-    <x-formulate-repeating-field-add-button :$field :$repeaterId />
-</fieldset>
+        @if ($orderable)
+        <x-appkit::repeating-group.reorder-buttons />
+        @endif
+    </div>
+</x-appkit::repeating-group.reorder-item>

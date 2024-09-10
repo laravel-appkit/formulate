@@ -4,8 +4,9 @@ namespace AppKit\Formulate\Components;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\ViewErrorBag;
+use Illuminate\View\Component;
 
-class Input extends BaseComponent
+class Input extends Component
 {
     public function __construct(
         public string $name,
@@ -33,12 +34,12 @@ class Input extends BaseComponent
     }
 
     /**
-     * Define the view name that is used for the component
+     * Get the view / contents that represent the component.
      *
-     * @return string
+     * @return \Illuminate\View\View|\Closure|string
      */
-    protected function viewName()
+    public function render()
     {
-        return 'formulate::components.input';
+        return view('formulate::components.input');
     }
 }

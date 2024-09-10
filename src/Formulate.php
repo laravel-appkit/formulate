@@ -8,7 +8,7 @@ use AppKit\Formulate\Components\CheckablesComponent;
 use AppKit\Formulate\Components\Field;
 use AppKit\Formulate\Components\FieldErrorComponent;
 use AppKit\Formulate\Components\FieldGroupComponent;
-use AppKit\Formulate\Components\FormComponent;
+use AppKit\Formulate\Components\Form;
 use AppKit\Formulate\Components\InputComponent;
 use AppKit\Formulate\Components\LabelComponent;
 use AppKit\Formulate\Components\OptionComponent;
@@ -43,9 +43,9 @@ class Formulate
 
     /**
      * The current form
-     * @var FormComponent
+     * @var Form
      */
-    protected ?FormComponent $form = null;
+    protected ?Form $form = null;
 
     /**
      * A collection of fields that are used within the current form
@@ -93,12 +93,12 @@ class Formulate
     {
         // define the blade components that this package exposes
         $components = [
-            'button' => ButtonComponent::class,
+            // 'button' => ButtonComponent::class,
             'checkables' => CheckablesComponent::class,
             // 'field' => Field::class,
             'field-errors' => FieldErrorComponent::class,
             // 'field-group' => FieldGroupComponent::class,
-            'form' => FormComponent::class,
+            // 'form' => Form::class,
             // 'input' => InputComponent::class,
             'label' => LabelComponent::class,
             // 'option' => OptionComponent::class,
@@ -121,7 +121,7 @@ class Formulate
         }
     }
 
-    public function registerForm($form)
+    public function registerForm(Form $form): void
     {
         // store the form instance
         $this->form = $form;
@@ -137,12 +137,12 @@ class Formulate
      * @param array|Model $data
      * @return void
      */
-    public function populateFormData(array | Model $data)
+    public function populateFormData(array | Model $data): void
     {
         $this->formData = $data;
     }
 
-    public function getForm()
+    public function getForm(): Form
     {
         return $this->form;
     }
@@ -152,7 +152,7 @@ class Formulate
      *
      * @return array|Model
      */
-    public function getFormData()
+    public function getFormData(): array|Model
     {
         return $this->formData;
     }
@@ -163,7 +163,7 @@ class Formulate
      * @param InputComponent $field
      * @return void
      */
-    public function registerField($field)
+    public function registerField($field): void
     {
         $this->fields[] = $field;
     }
@@ -173,7 +173,7 @@ class Formulate
      *
      * @return Collection
      */
-    public function getFields()
+    public function getFields(): Collection
     {
         return $this->fields;
     }
@@ -192,7 +192,7 @@ class Formulate
      *
      * @return mixed
      */
-    public function getCurrentFieldValue()
+    public function getCurrentFieldValue(): mixed
     {
         return $this->currentFieldValue;
     }

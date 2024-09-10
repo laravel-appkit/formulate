@@ -4,9 +4,17 @@ namespace AppKit\Formulate\Components;
 
 use AppKit\Formulate\Facades\Formulate;
 use Illuminate\Support\Str;
+use Illuminate\View\Component;
 
-class Field extends BaseComponent
+class Field extends Component
 {
+    /**
+     * The form that this field belongs to
+     *
+     * @var Form
+     */
+    public Form $form;
+
     public function __construct(
         public string $name,
         public ?string $id = null,
@@ -19,6 +27,7 @@ class Field extends BaseComponent
         public mixed $value = null,
         public string $type = 'text',
     ) {
+        // assign the current form
         $this->form = Formulate::getForm();
 
         // register the field with the service provider
@@ -70,15 +79,10 @@ class Field extends BaseComponent
      * @param  array  $attributes
      * @return $this
      */
-    public function withAttributes(array $attributes)
+    public function withAttributes(array $attributes): self
     {
         // make sure that we have an attribute bag setup for everything
         $this->attributes = $this->attributes ?: $this->newAttributeBag();
-
-        // split out all of the attribute bags
-        // $this->attributes->setAttributes($this->getPrefixedAttributes($attributes));
-        // $this->groupAttributes->setAttributes($this->getPrefixedAttributes($attributes, 'group'));
-        // $this->labelAttributes->setAttributes($this->getPrefixedAttributes($attributes, 'label'));
 
         // return the instance of the component
         return $this;
@@ -111,7 +115,12 @@ class Field extends BaseComponent
         })->toArray();
     }
 
-    public function getDefaultValue()
+    /**
+     * Get the default value for the given field
+     *
+     * @return mixed
+     */
+    public function getDefaultValue(): mixed
     {
         if ($this->multiple) {
             return [''];
@@ -121,12 +130,12 @@ class Field extends BaseComponent
     }
 
     /**
-     * Define the view name that is used for the component
+     * Get the view / contents that represent the component.
      *
-     * @return string
+     * @return \Illuminate\View\View|\Closure|string
      */
-    protected function viewName()
+    public function render()
     {
-        return 'formulate::components.field';
+        return view('formulate::components.field');
     }
 }

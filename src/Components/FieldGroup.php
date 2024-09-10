@@ -2,31 +2,40 @@
 
 namespace AppKit\Formulate\Components;
 
-use AppKit\Formulate\Components\Concerns\InheritsAttributes;
+use AppKit\Formulate\Components\Customisers\RepeatingFields\InputCustomiser;
+use AppKit\Formulate\Components\Customisers\RepeatingFields\LabelCustomiser;
+use AppKit\UI\Components\Input;
+use AppKit\UI\Components\Label;
+use AppKit\UI\Facades\UI;
 use Illuminate\View\Component;
 
-class FieldGroup extends BaseComponent
+class FieldGroup extends Component
 {
-    // use InheritsAttributes;
-
     /**
      * Initialise the field group component
      *
      * @param Input $field
      * @return void
      */
-    public function __construct(public ?string $name = '')
+    public function __construct(public ?string $name = '', public bool $multiple = false, public bool $orderable = false, public string $label = '')
     {
-        // $this->inheritAttributes($field->groupAttributes);
+        if ($multiple) {
+            UI::customiseComponents([
+                // FieldError::class => FieldErrorCustomiser::class,
+                // Form::class => FormCustomiser::class,
+                Input::class => InputCustomiser::class,
+                Label::class => LabelCustomiser::class,
+            ]);
+        }
     }
 
     /**
-     * Define the view name that is used for the component
+     * Get the view / contents that represent the component.
      *
-     * @return string
+     * @return \Illuminate\View\View|\Closure|string
      */
-    protected function viewName()
+    public function render()
     {
-        return 'formulate::components.field-group';
+        return view('formulate::components.field-group');
     }
 }

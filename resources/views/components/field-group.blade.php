@@ -1,55 +1,15 @@
-{{-- <x-dynamic-component component="{{ Formulate::getDynamicComponentName('repeating-field') }}" :$field>
-    <div {!! $attributes !!}>
-            <x-formulate-label :$field />
-
-            <div class="flex w-full items-center">
-                @if ($field->multiple && $field->orderable)
-                <x-formulate-reorderable-handle class="flex-none" />
-                @endif
-
-                <div class="flex-auto">{{ $slot }}</div>
-
-                @if ($field->multiple)
-                <div class="flex-none flex">
-                    @if ($field->orderable)
-                    <x-formulate-reorderable-buttons source="form.{{ $field->name }}" />
-                    @endif
-
-                    <x-formulate-repeating-field-remove-button :$field />
-                </div>
-                @endif
-            </div>
-
-            <x-formulate-field-errors :$field />
-    </div>
-</x-dynamic-component> --}}
-
-{{-- <x-dynamic-component component="{{ Formulate::getDynamicComponentName('repeating-field') }}" :$field> --}}
-    {{-- <x-appkit::field-group :label="$field->label" :help="$field->help" error="Something went wrong"> --}}
-    <x-appkit::field-group :$name>
+@if ($multiple)
+    <x-appkit::fieldset legend="{{ Illuminate\Support\Str::plural($label) }}" class="space-y-2">
+        <x-appkit::repeating-group source="form.{{ $name }}" add-another="true" x-data="{draggable: false, draggingIndex: null, droppingIndex: null}">
+            <x-appkit::field-group :$label :$name>
+                <x-formulate::repeating-field :$name :$orderable source="form.{{ $name }}">
+                    {{ $slot }}
+                </x-formulate::repeating-field>
+            </x-appkit::field-group>
+        </x-appkit::repeating-group>
+    </x-appkit::fieldset>
+@else
+    <x-appkit::field-group :$label :$name>
         {{ $slot }}
     </x-appkit::field-group>
-    {{-- <div {!! $attributes !!}>
-            <x-formulate-label :$field />
-
-            <div class="flex w-full items-center">
-                @if ($field->multiple && $field->orderable)
-                <x-formulate-reorderable-handle class="flex-none" />
-                @endif
-
-                <div class="flex-auto">{{ $slot }}</div>
-
-                @if ($field->multiple)
-                <div class="flex-none flex">
-                    @if ($field->orderable)
-                    <x-formulate-reorderable-buttons source="form.{{ $field->name }}" />
-                    @endif
-
-                    <x-formulate-repeating-field-remove-button :$field />
-                </div>
-                @endif
-            </div>
-
-            <x-formulate-field-errors :$field />
-    </div> --}}
-{{-- </x-dynamic-component> --}}
+@endif

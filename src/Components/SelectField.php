@@ -49,12 +49,12 @@ class SelectField extends Field
     }
 
     /**
-     * Define the view name that is used for the component
+     * Get the view / contents that represent the component.
      *
-     * @return string
+     * @return \Illuminate\View\View|\Closure|string
      */
-    protected function viewName()
+    public function render()
     {
-        return 'formulate::components.select-field';
+        return view('formulate::components.select-field');
     }
 }
