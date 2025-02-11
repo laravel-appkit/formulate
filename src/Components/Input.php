@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\ViewErrorBag;
 use Illuminate\View\Component;
 use Illuminate\View\ComponentAttributeBag;
-use PDO;
 
 /** @package AppKit\Formulate\Components */
 class Input extends Component
