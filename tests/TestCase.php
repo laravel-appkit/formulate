@@ -4,6 +4,7 @@ namespace AppKit\Formulate\Tests;
 
 use AppKit\Formulate\Facades\Formulate;
 use AppKit\Formulate\FormulateServiceProvider;
+use AppKit\UI\UIServiceProvider;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use Illuminate\Testing\TestView;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
@@ -45,7 +46,7 @@ class TestCase extends OrchestraTestCase
      */
     protected function getPackageProviders($app)
     {
-        return [FormulateServiceProvider::class];
+        return [FormulateServiceProvider::class, UIServiceProvider::class];
     }
 
     /**

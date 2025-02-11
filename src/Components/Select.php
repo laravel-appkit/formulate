@@ -4,13 +4,10 @@ namespace AppKit\Formulate\Components;
 
 class Select extends Input
 {
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\View\View|\Closure|string
-     */
     public function render()
     {
-        return view('formulate::components.select');
+        return function ($data) {
+            return view('formulate::components.select', array_merge($data, $this->data()))->render();
+        };
     }
 }

@@ -11,6 +11,8 @@ class Textarea extends Input
      */
     public function render()
     {
-        return view('formulate::components.textarea');
+        return function ($data) {
+            return view('formulate::components.textarea',array_merge($data, $this->data()))->render();
+        };
     }
 }

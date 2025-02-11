@@ -62,6 +62,13 @@ class Element
         return $this;
     }
 
+    public function withAttributeValueContaining($attribute, $value)
+    {
+        PHPUnit::assertStringContainsString($value, $this->crawler->filter($this->path)->attr($attribute));
+
+        return $this;
+    }
+
     public function withContent($value)
     {
         PHPUnit::assertEquals($value, $this->crawler->filter($this->path)->innerText());

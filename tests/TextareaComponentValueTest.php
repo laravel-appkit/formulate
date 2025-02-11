@@ -16,9 +16,9 @@ class TextareaComponentValueTest extends TestCase
         $data = [];
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-textarea name="my-input" value="Default Value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::textarea name="my-input" value="Default Value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('textarea[name="my-input"]')->withContent('Default Value');
@@ -31,9 +31,9 @@ class TextareaComponentValueTest extends TestCase
         $data = ['my-input' => 'Data Value'];
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-textarea name="my-input" value="Default Value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::textarea name="my-input" value="Default Value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('textarea[name="my-input"]')->withContent('Data Value');
@@ -46,9 +46,9 @@ class TextareaComponentValueTest extends TestCase
         $data = factory(Article::class)->make(['title' => 'My Title']);
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-textarea name="title" value="Default Value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::textarea name="title" value="Default Value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('textarea[name="title"]')->withContent('My Title');
@@ -61,9 +61,9 @@ class TextareaComponentValueTest extends TestCase
         $data = factory(Article::class)->make(['title' => 'My Title']);
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-textarea name="author" value="Default Value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::textarea name="author" value="Default Value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('textarea[name="author"]')->withContent('Default Value');
@@ -79,9 +79,9 @@ class TextareaComponentValueTest extends TestCase
         $data = ['my-input' => 'Data Value'];
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-textarea name="my-input" value="Default Value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::textarea name="my-input" value="Default Value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('textarea[name="my-input"]')->withContent('Old Value');
@@ -97,10 +97,10 @@ class TextareaComponentValueTest extends TestCase
         $data = ['my-input' => 'Data Value'];
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-textarea name="my-input" value="Default Value" />
-            <x-textarea name="my-input2" value="Default Value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::textarea name="my-input" value="Default Value" />
+            <x-formulate::textarea name="my-input2" value="Default Value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('textarea[name="my-input"]')->withContent('Old Value');
@@ -117,11 +117,11 @@ class TextareaComponentValueTest extends TestCase
         $data = ['my-input' => 'Data Value', 'my-input2' => 'Data Value 2'];
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-textarea name="my-input" value="Default Value" />
-            <x-textarea name="my-input2" value="Default Value 2" />
-            <x-textarea name="my-input3" value="Default Value 3" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::textarea name="my-input" value="Default Value" />
+            <x-formulate::textarea name="my-input2" value="Default Value 2" />
+            <x-formulate::textarea name="my-input3" value="Default Value 3" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('textarea[name="my-input"]')->withContent('Old Value');

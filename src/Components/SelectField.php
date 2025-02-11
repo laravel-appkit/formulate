@@ -45,7 +45,9 @@ class SelectField extends Field
             $this->options = $this->options->toArray();
         }
 
-        $this->options = ['' => ''] + $this->options;
+        if (!empty($this->options)) {
+            $this->options = ['' => ''] + $this->options;
+        }
     }
 
     /**

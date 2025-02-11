@@ -25,9 +25,9 @@ class SelectComponentValueTest extends TestCase
         $options = $this->options;
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-select name="my-input" :options="$options" value="a" />
-        </x-form>', compact('data', 'options'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::select name="my-input" :options="$options" value="a" />
+        </x-formulate::form>', compact('data', 'options'));
 
         // test the component
         $view->assertHasElement('option[value="a"]')->withAttribute('selected')->withContent('Option A');
@@ -41,9 +41,9 @@ class SelectComponentValueTest extends TestCase
         $options = $this->options;
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-select name="my-input" :options="$options" value="a" />
-        </x-form>', compact('data', 'options'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::select name="my-input" :options="$options" value="a" />
+        </x-formulate::form>', compact('data', 'options'));
 
         // test the component
         $view->assertHasElement('option[value="b"]')->withAttribute('selected')->withContent('Option B');
@@ -57,9 +57,9 @@ class SelectComponentValueTest extends TestCase
         $options = $this->options;
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-select name="category" :options="$options" value="a" />
-        </x-form>', compact('data', 'options'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::select name="category" :options="$options" value="a" />
+        </x-formulate::form>', compact('data', 'options'));
 
         // test the component
         $view->assertHasElement('option[value="b"]')->withAttribute('selected')->withContent('Option B');
@@ -73,9 +73,9 @@ class SelectComponentValueTest extends TestCase
         $options = $this->options;
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-select name="author" :options="$options" value="a" />
-        </x-form>', compact('data', 'options'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::select name="author" :options="$options" value="a" />
+        </x-formulate::form>', compact('data', 'options'));
 
         // test the component
         $view->assertHasElement('option[value="a"]')->withAttribute('selected')->withContent('Option A');
@@ -92,9 +92,9 @@ class SelectComponentValueTest extends TestCase
         $options = $this->options;
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-select name="my-input" :options="$options" value="a" />
-        </x-form>', compact('data', 'options'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::select name="my-input" :options="$options" value="a" />
+        </x-formulate::form>', compact('data', 'options'));
 
         // test the component
         $view->assertHasElement('option[value="c"]')->withAttribute('selected')->withContent('Option C');
@@ -111,10 +111,10 @@ class SelectComponentValueTest extends TestCase
         $options = $this->options;
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-select name="my-input" :options="$options" value="a" />
-            <x-select name="my-input2" :options="$options" value="a" />
-        </x-form>', compact('data', 'options'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::select name="my-input" :options="$options" value="a" />
+            <x-formulate::select name="my-input2" :options="$options" value="a" />
+        </x-formulate::form>', compact('data', 'options'));
 
         // test the component
         $view->assertHasElement('select[name="my-input"] option[value="d"]')->withAttribute('selected')->withContent('Option D');
@@ -132,11 +132,11 @@ class SelectComponentValueTest extends TestCase
         $options = $this->options;
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-select name="my-input" :options="$options" value="a" />
-            <x-select name="my-input2" :options="$options" value="a" />
-            <x-select name="my-input3" :options="$options" value="a" />
-        </x-form>', compact('data', 'options'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::select name="my-input" :options="$options" value="a" />
+            <x-formulate::select name="my-input2" :options="$options" value="a" />
+            <x-formulate::select name="my-input3" :options="$options" value="a" />
+        </x-formulate::form>', compact('data', 'options'));
 
         // test the component
         $view->assertHasElement('select[name="my-input"] option[value="e"]')->withAttribute('selected')->withContent('Option E');
@@ -155,9 +155,9 @@ class SelectComponentValueTest extends TestCase
         $options = Article::all()->pluck('title', 'id');
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-select name="my-input" :options="$options" />
-        </x-form>', compact('data', 'options'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::select name="my-input" :options="$options" />
+        </x-formulate::form>', compact('data', 'options'));
 
         // test the component
         $view->assertHasElement('option[value="' . $firstArticle->id . '"]')->withAttribute('selected')->withContent($firstArticle->title);

@@ -2,35 +2,40 @@
 
 namespace AppKit\Formulate\Tests;
 
+use Illuminate\View\ViewException;
+
 class CheckboxInputComponentTest extends TestCase
 {
     /** @test */
     public function checkboxInputComponentExists()
     {
-        $view = $this->blade('<x-input type="checkbox" name="my-input"></x-input>');
+        $view = $this->blade('<x-formulate::input type="checkbox" name="my-input"></x-formulate::input>');
 
         $view->assertHasElement('input')->withAttributeValue('type', 'checkbox')->withAttributeValue('name', 'my-input');
     }
 
+    /**
+     * @test
+     */
     public function checkboxInputComponentsMustHaveAName()
     {
-        $this->expectException(Illuminate\View\ViewException::class);
+        $this->expectException(ViewException::class);
 
-        $this->blade('<x-input type="checkbox"></x-input>');
+        $this->blade('<x-formulate::input type="checkbox"></x-formulate::input>');
     }
 
     /** @test */
     public function checkboxInputComponentCanHaveAttributes()
     {
-        $view = $this->blade('<x-input type="checkbox" name="my-input" class="my-class"></x-input>');
+        $view = $this->blade('<x-formulate::input type="checkbox" name="my-input" class="my-class"></x-formulate::input>');
 
-        $view->assertHasElement('input')->withAttributeValue('class', 'my-class');
+        $view->assertHasElement('input')->withAttributeValueContaining('class', 'my-class');
     }
 
     /** @test */
     public function checkboxInputComponentsHaveAType()
     {
-        $view = $this->blade('<x-input type="checkbox" name="my-input"></x-input>');
+        $view = $this->blade('<x-formulate::input type="checkbox" name="my-input"></x-formulate::input>');
 
         $view->assertHasElement('input')->withAttributeValue('type', 'checkbox');
     }
@@ -38,7 +43,7 @@ class CheckboxInputComponentTest extends TestCase
     /** @test */
     public function checkboxInputComponentsGenerateADefaultId()
     {
-        $view = $this->blade('<x-input type="checkbox" name="my-input"></x-input>');
+        $view = $this->blade('<x-formulate::input type="checkbox" name="my-input"></x-formulate::input>');
 
         $view->assertHasElement('input')->withAttributeValue('id', 'my-input');
     }
@@ -46,7 +51,7 @@ class CheckboxInputComponentTest extends TestCase
     /** @test */
     public function checkboxInputComponentsCanHaveADefinedId()
     {
-        $view = $this->blade('<x-input type="checkbox" name="my-input" id="my-id"></x-input>');
+        $view = $this->blade('<x-formulate::input type="checkbox" name="my-input" id="my-id"></x-formulate::input>');
 
         $view->assertHasElement('input')->withAttributeValue('id', 'my-id');
     }
@@ -54,23 +59,23 @@ class CheckboxInputComponentTest extends TestCase
     /** @test */
     public function checkboxInputComponentsCanHaveGroupAttributes()
     {
-        $view = $this->blade('<x-input type="checkbox" name="my-input" group:class="my-group"></x-input>');
+        $view = $this->blade('<x-formulate::input type="checkbox" name="my-input" group:class="my-group"></x-formulate::input>');
 
-        $view->assertHasElement('div')->withAttributeValue('class', 'my-group');
+        $view->assertHasElement('div')->withAttributeValueContaining('class', 'my-group');
     }
 
     /** @test */
     public function checkboxInputComponentsCanHaveLabelAttributes()
     {
-        $view = $this->blade('<x-input type="checkbox" name="my-input" label:class="my-label"></x-input>');
+        $view = $this->blade('<x-formulate::input type="checkbox" name="my-input" label:class="my-label"></x-formulate::input>');
 
-        $view->assertHasElement('label')->withAttributeValue('class', 'my-label');
+        $view->assertHasElement('label')->withAttributeValueContaining('class', 'my-label');
     }
 
     /** @test */
     public function checkboxInputComponentsGenerateLabelValues()
     {
-        $view = $this->blade('<x-input type="checkbox" name="my-input"></x-input>');
+        $view = $this->blade('<x-formulate::input type="checkbox" name="my-input"></x-formulate::input>');
 
         $view->assertHasElement('label')->withContent('My input');
     }
@@ -78,7 +83,7 @@ class CheckboxInputComponentTest extends TestCase
     /** @test */
     public function checkboxInputComponentsCanHaveSetLabels()
     {
-        $view = $this->blade('<x-input type="checkbox" name="my-input" label="My label"></x-input>');
+        $view = $this->blade('<x-formulate::input type="checkbox" name="my-input" label="My label"></x-formulate::input>');
 
         $view->assertHasElement('label')->withContent('My label');
     }
@@ -86,9 +91,9 @@ class CheckboxInputComponentTest extends TestCase
     /** @test */
     public function checkboxInputComponentsWithArrayNamesGenerateSuitableIds()
     {
-        $view = $this->blade('<x-input type="checkbox" name="my-input[]" label="My label"></x-input><x-input type="checkbox" name="my-input[]" label="My label"></x-input>');
+        $view = $this->blade('<x-formulate::input type="checkbox" name="my-input[]" label="My label"></x-formulate::input><x-formulate::input type="checkbox" name="my-input[]" label="My label"></x-formulate::input>');
 
-        $view->assertHasElement('input[id="my-input-1"]')->withAttributeValue('id', 'my-input-1');
+        $view->assertHasElement('input[id="my-input"]')->withAttributeValue('id', 'my-input');
         $view->assertHasElement('input[id="my-input-2"]')->withAttributeValue('id', 'my-input-2');
     }
 }

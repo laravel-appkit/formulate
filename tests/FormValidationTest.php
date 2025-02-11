@@ -16,9 +16,9 @@ class FormValidationTest extends TestCase
         $this->withInvalidFields(['my-input']);
 
         // render the blade component
-        $view = $this->blade('<x-form>
-            <x-input name="my-input" />
-        </x-form>');
+        $view = $this->blade('<x-formulate::form>
+            <x-formulate::input name="my-input" />
+        </x-formulate::form>');
 
         // test the component
         $this->assertStringContainsString('Whoops! Something went wrong.', $view);
@@ -28,9 +28,9 @@ class FormValidationTest extends TestCase
     public function ifNoFieldsHaveErrorsNoMessageWillBeShownAtTheTopOfTheForm()
     {
         // render the blade component
-        $view = $this->blade('<x-form>
-            <x-input name="my-input" />
-        </x-form>');
+        $view = $this->blade('<x-formulate::form>
+            <x-formulate::input name="my-input" />
+        </x-formulate::form>');
 
         // test the component
         $this->assertStringNotContainsString('Whoops! Something went wrong.', $view);
@@ -45,9 +45,9 @@ class FormValidationTest extends TestCase
         $this->withInvalidFields(['my-input']);
 
         // render the blade component
-        $view = $this->blade('<x-form>
-            <x-input name="my-input" />
-        </x-form>');
+        $view = $this->blade('<x-formulate::form>
+            <x-formulate::input name="my-input" />
+        </x-formulate::form>');
 
         // test the component
         $this->assertStringContainsString('Custom Error Message', $view);
@@ -60,11 +60,11 @@ class FormValidationTest extends TestCase
         $this->withInvalidFields(['my-input']);
 
         // render the blade component
-        $view = $this->blade('<x-form>
-            <x-input name="my-input" />
-        </x-form>');
+        $view = $this->blade('<x-formulate::form>
+            <x-formulate::input name="my-input" />
+        </x-formulate::form>');
 
         // test the component
-        $view->assertHasElement('div > div')->withContent('my-input Validation Error');
+        $view->assertHasElement('div > div')->withContent(config('formulate.form_error_message'));
     }
 }

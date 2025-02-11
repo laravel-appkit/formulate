@@ -9,7 +9,7 @@ class FormComponentTest extends TestCase
     /** @test */
     public function formComponentExists()
     {
-        $view = $this->blade('<x-form></x-form>');
+        $view = $this->blade('<x-formulate::form></x-formulate::form>');
 
         $view->assertHasElement('form');
     }
@@ -17,7 +17,7 @@ class FormComponentTest extends TestCase
     /** @test */
     public function formComponentsCanHaveAttributes()
     {
-        $view = $this->blade('<x-form class="my-class"></x-form>');
+        $view = $this->blade('<x-formulate::form class="my-class"></x-formulate::form>');
 
         $view->assertHasElement('form')->withAttributeValue('class', 'my-class');
     }
@@ -25,7 +25,7 @@ class FormComponentTest extends TestCase
     /** @test */
     public function formComponentsCanHaveAnAction()
     {
-        $view = $this->blade('<x-form action="/"></x-form>');
+        $view = $this->blade('<x-formulate::form action="/"></x-formulate::form>');
 
         $view->assertHasElement('form')->withAttributeValue('action', '/');
     }
@@ -33,7 +33,7 @@ class FormComponentTest extends TestCase
     /** @test */
     public function formComponentsCanHaveAGetMethod()
     {
-        $view = $this->blade('<x-form action="/" method="GET"></x-form>');
+        $view = $this->blade('<x-formulate::form action="/" method="GET"></x-formulate::form>');
 
         $view->assertHasElement('form')->withAttributeValue('method', 'GET');
     }
@@ -41,7 +41,7 @@ class FormComponentTest extends TestCase
     /** @test */
     public function formComponentsCanHaveAPostMethod()
     {
-        $view = $this->blade('<x-form action="/" method="POST"></x-form>');
+        $view = $this->blade('<x-formulate::form action="/" method="POST"></x-formulate::form>');
 
         $view->assertHasElement('form')->withAttributeValue('method', 'POST');
         $view->assertHasElement('input[name="_token"]')->withAttributeValue('type', 'hidden')->withAttribute('value');
@@ -50,7 +50,7 @@ class FormComponentTest extends TestCase
     /** @test */
     public function formComponentsCanHaveANonStandardMethod()
     {
-        $view = $this->blade('<x-form action="/" method="PATCH"></x-form>');
+        $view = $this->blade('<x-formulate::form action="/" method="PATCH"></x-formulate::form>');
 
         $view->assertHasElement('form')->withAttributeValue('method', 'POST');
         $view->assertHasElement('input[name="_token"]')->withAttributeValue('type', 'hidden')->withAttribute('value');
@@ -60,7 +60,7 @@ class FormComponentTest extends TestCase
     /** @test */
     public function formComponentsCanHaveSlotValue()
     {
-        $view = $this->blade('<x-form action="/" method="GET"><p>Hello World</p></x-form>');
+        $view = $this->blade('<x-formulate::form action="/" method="GET"><p>Hello World</p></x-formulate::form>');
 
         $view->assertHasElement('p')->withContent('Hello World');
     }
@@ -70,7 +70,7 @@ class FormComponentTest extends TestCase
     {
         Route::post('/example-route', 'ExampleController@example')->name('example');
 
-        $view = $this->blade('<x-form route="example"></x-form>');
+        $view = $this->blade('<x-formulate::form route="example"></x-formulate::form>');
 
         $view->assertHasElement('form')->withAttributeValue('action', config('app.url') . '/example-route')->withAttributeValue('method', 'POST');
         $view->assertHasElement('input[name="_token"]')->withAttributeValue('type', 'hidden')->withAttribute('value');
@@ -81,7 +81,7 @@ class FormComponentTest extends TestCase
     {
         Route::post('/example-route', 'ExampleController@example')->name('example');
 
-        $view = $this->blade('<x-form route="example" method="PATCH"></x-form>');
+        $view = $this->blade('<x-formulate::form route="example" method="PATCH"></x-formulate::form>');
 
         $view->assertHasElement('form')->withAttributeValue('action', config('app.url') . '/example-route')->withAttributeValue('method', 'POST');
         $view->assertHasElement('input[name="_token"]')->withAttributeValue('type', 'hidden')->withAttribute('value');
@@ -94,7 +94,7 @@ class FormComponentTest extends TestCase
         Route::post('/example-route/{name}', 'ExampleController@example')->name('example');
 
         $params = ['name' => 'my-name'];
-        $view = $this->blade('<x-form route="example" :route-params="$params"></x-form>', compact('params'));
+        $view = $this->blade('<x-formulate::form route="example" :route-params="$params"></x-formulate::form>', compact('params'));
 
         $view->assertHasElement('form')->withAttributeValue('action', config('app.url') . '/example-route/my-name')->withAttributeValue('method', 'POST');
         $view->assertHasElement('input[name="_token"]')->withAttributeValue('type', 'hidden')->withAttribute('value');

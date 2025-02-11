@@ -12,7 +12,7 @@ class Field extends Component
      *
      * @var Form
      */
-    public Form $form;
+    public ?Form $form;
 
     public function __construct(
         public string $name,

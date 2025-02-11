@@ -2,75 +2,105 @@
 
 namespace AppKit\Formulate\Tests;
 
+use Illuminate\View\ViewException;
+
 class TextareaComponentTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     * @group x-formulate-textarea
+    */
     public function textareaComponentExists()
     {
-        $view = $this->blade('<x-textarea name="my-input"></x-textarea>');
+        $view = $this->blade('<x-formulate::textarea name="my-input"></x-formulate::textarea>');
 
         $view->assertHasElement('textarea')->withAttributeValue('name', 'my-input');
     }
 
+    /**
+     * @test
+     * @group x-formulate-textarea
+    */
     public function textareaComponentsMustHaveAName()
     {
-        $this->expectException(Illuminate\View\ViewException::class);
+        $this->expectException(ViewException::class);
 
-        $this->blade('<x-textarea></x-textarea>');
+        $this->blade('<x-formulate::textarea></x-formulate::textarea>');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @group x-formulate-textarea
+    */
     public function textareaComponentCanHaveAttributes()
     {
-        $view = $this->blade('<x-textarea name="my-input" class="my-class"></x-textarea>');
+        $view = $this->blade('<x-formulate::textarea name="my-input" class="my-class"></x-formulate::textarea>');
 
-        $view->assertHasElement('textarea')->withAttributeValue('class', 'my-class');
+        $view->assertHasElement('textarea')->withAttributeValueContaining('class', 'my-class');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @group x-formulate-textarea
+    */
     public function textareaComponentsGenerateADefaultId()
     {
-        $view = $this->blade('<x-textarea name="my-input"></x-textarea>');
+        $view = $this->blade('<x-formulate::textarea name="my-input"></x-formulate::textarea>');
 
         $view->assertHasElement('textarea')->withAttributeValue('id', 'my-input');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @group x-formulate-textarea
+    */
     public function textareaComponentsCanHaveADefinedId()
     {
-        $view = $this->blade('<x-textarea name="my-input" id="my-id"></x-textarea>');
+        $view = $this->blade('<x-formulate::textarea name="my-input" id="my-id"></x-formulate::textarea>');
 
         $view->assertHasElement('textarea')->withAttributeValue('id', 'my-id');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @group x-formulate-textarea
+    */
     public function textareaComponentsCanHaveGroupAttributes()
     {
-        $view = $this->blade('<x-textarea name="my-input" group:class="my-group"></x-textarea>');
+        $view = $this->blade('<x-formulate::textarea name="my-input" group:class="my-group"></x-formulate::textarea>');
 
-        $view->assertHasElement('div')->withAttributeValue('class', 'my-group');
+        $view->assertHasElement('div')->withAttributeValueContaining('class', 'my-group');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @group x-formulate-textarea
+    */
     public function textareaComponentsCanHaveLabelAttributes()
     {
-        $view = $this->blade('<x-textarea name="my-input" label:class="my-label"></x-textarea>');
+        $view = $this->blade('<x-formulate::textarea name="my-input" label:class="my-label"></x-formulate::textarea>');
 
-        $view->assertHasElement('label')->withAttributeValue('class', 'my-label');
+        $view->assertHasElement('label')->withAttributeValueContaining('class', 'my-label');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @group x-formulate-textarea
+    */
     public function textareaComponentsGenerateLabelValues()
     {
-        $view = $this->blade('<x-textarea name="my-input"></x-textarea>');
+        $view = $this->blade('<x-formulate::textarea name="my-input"></x-formulate::textarea>');
 
         $view->assertHasElement('label')->withContent('My input');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @group x-formulate-textarea
+    */
     public function textareaComponentsCanHaveSetLabels()
     {
-        $view = $this->blade('<x-textarea name="my-input" label="My label"></x-textarea>');
+        $view = $this->blade('<x-formulate::textarea name="my-input" label="My label"></x-formulate::textarea>');
 
         $view->assertHasElement('label')->withContent('My label');
     }

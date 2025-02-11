@@ -11,7 +11,7 @@ class ModelRouteBindingTest extends TestCase
     {
         $data = factory(Article::class)->create(['title' => 'My Title']);
 
-        $view = $this->blade('<x-form route="article.update" :data="$data"></x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form route="article.update" :data="$data"></x-formulate::form>', compact('data'));
 
         $view->assertHasElement('form')->withAttributeValue('action', route('article.update', $data));
     }

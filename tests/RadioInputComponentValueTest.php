@@ -16,9 +16,9 @@ class RadioInputComponentValueTest extends TestCase
         $data = [];
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="radio" name="my-input" value="radio-value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="radio" name="my-input" value="radio-value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type=radio]')->withAttributeValue('value', 'radio-value');
@@ -31,9 +31,9 @@ class RadioInputComponentValueTest extends TestCase
         $data = ['my-input' => false];
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="radio" name="my-input" value="radio-value" checked />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="radio" name="my-input" value="radio-value" checked />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type="radio"]')->withAttributeValue('value', 'radio-value')->withoutAttribute('checked');
@@ -46,9 +46,9 @@ class RadioInputComponentValueTest extends TestCase
         $data = ['my-input' => 'radio-value'];
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="radio" name="my-input" value="radio-value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="radio" name="my-input" value="radio-value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type="radio"]')->withAttributeValue('value', 'radio-value')->withAttribute('checked');
@@ -61,9 +61,9 @@ class RadioInputComponentValueTest extends TestCase
         $data = ['my-input' => true];
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="radio" name="my-input" value="radio-value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="radio" name="my-input" value="radio-value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type="radio"]')->withAttributeValue('value', 'radio-value')->withAttribute('checked');
@@ -76,9 +76,9 @@ class RadioInputComponentValueTest extends TestCase
         $data = ['my-input' => false];
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="radio" name="my-input" value="radio-value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="radio" name="my-input" value="radio-value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type="radio"]')->withAttributeValue('value', 'radio-value')->withoutAttribute('checked');
@@ -92,9 +92,9 @@ class RadioInputComponentValueTest extends TestCase
         $this->mockPostedValues(['my-input' => 'radio-value']);
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="radio" name="my-input" value="radio-value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="radio" name="my-input" value="radio-value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type="radio"]')->withAttributeValue('value', 'radio-value')->withAttribute('checked');
@@ -108,9 +108,9 @@ class RadioInputComponentValueTest extends TestCase
         $this->mockPostedValues(['my-input' => true]);
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="radio" name="my-input" value="radio-value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="radio" name="my-input" value="radio-value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type="radio"]')->withAttributeValue('value', 'radio-value')->withAttribute('checked');
@@ -124,9 +124,9 @@ class RadioInputComponentValueTest extends TestCase
         $this->mockPostedValues(['my-input' => false]);
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="radio" name="my-input" value="radio-value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="radio" name="my-input" value="radio-value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type="radio"]')->withAttributeValue('value', 'radio-value')->withoutAttribute('checked');
@@ -139,9 +139,9 @@ class RadioInputComponentValueTest extends TestCase
         $data = factory(Article::class)->make(['published' => false]);
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="radio" name="published" value="true" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="radio" name="published" value="true" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type="radio"]')->withAttributeValue('name', 'published')->withAttributeValue('value', 'true')->withoutAttribute('checked');
@@ -154,9 +154,9 @@ class RadioInputComponentValueTest extends TestCase
         $data = factory(Article::class)->make(['published' => true]);
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="radio" name="published" value="true" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="radio" name="published" value="true" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type="radio"]')->withAttributeValue('name', 'published')->withAttributeValue('value', 'true')->withAttribute('checked');
@@ -169,9 +169,9 @@ class RadioInputComponentValueTest extends TestCase
         $data = factory(Article::class)->make(['featured' => false]);
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="radio" name="featured" value="true" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="radio" name="featured" value="true" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type="radio"]')->withAttributeValue('name', 'featured')->withAttributeValue('value', 'true')->withoutAttribute('checked');
@@ -184,9 +184,9 @@ class RadioInputComponentValueTest extends TestCase
         $data = factory(Article::class)->make(['featured' => true]);
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="radio" name="featured" value="true" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="radio" name="featured" value="true" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type="radio"]')->withAttributeValue('name', 'featured')->withAttributeValue('value', 'true')->withAttribute('checked');
@@ -199,9 +199,9 @@ class RadioInputComponentValueTest extends TestCase
         $data = factory(Article::class)->make(['category' => 'b']);
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="radio" name="featured" value="true" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="radio" name="featured" value="true" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type="radio"]')->withAttributeValue('name', 'featured')->withAttributeValue('value', 'true')->withoutAttribute('checked');
@@ -215,10 +215,10 @@ class RadioInputComponentValueTest extends TestCase
         $this->mockPostedValues(['my-input' => true, 'my-input-2' => false]);
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="radio" name="my-input" value="radio-value" />
-            <x-input type="radio" name="my-input-2" value="radio-value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="radio" name="my-input" value="radio-value" />
+            <x-formulate::input type="radio" name="my-input-2" value="radio-value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[name="my-input"]')->withAttributeValue('value', 'radio-value')->withAttribute('checked');
@@ -233,12 +233,12 @@ class RadioInputComponentValueTest extends TestCase
         $data = ['my-input' => true];
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="radio" name="my-input" value="radio-value" />
-            <x-input type="radio" name="my-input-2" value="radio-value" />
-            <x-input type="radio" name="my-input-3" value="radio-value" />
-            <x-input type="radio" name="my-input-4" value="radio-value" checked />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="radio" name="my-input" value="radio-value" />
+            <x-formulate::input type="radio" name="my-input-2" value="radio-value" />
+            <x-formulate::input type="radio" name="my-input-3" value="radio-value" />
+            <x-formulate::input type="radio" name="my-input-4" value="radio-value" checked />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[name="my-input"]')->withAttributeValue('value', 'radio-value')->withoutAttribute('checked');

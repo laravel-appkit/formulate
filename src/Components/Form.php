@@ -2,9 +2,10 @@
 
 namespace AppKit\Formulate\Components;
 
-use AppKit\Formulate\Components\Customisers\Precognition\FieldErrorCustomiser;
-use AppKit\Formulate\Components\Customisers\Precognition\FormCustomiser;
-use AppKit\Formulate\Components\Customisers\Precognition\InputCustomiser;
+use AppKit\Formulate\Components\Customisers\AlpineJs\FormCustomiser as AlpineJsFormCustomiser;
+use AppKit\Formulate\Components\Customisers\Precognition\FieldErrorCustomiser as PrecognitionFieldErrorCustomiser;
+use AppKit\Formulate\Components\Customisers\Precognition\FormCustomiser as PrecognitionFormCustomiser;
+use AppKit\Formulate\Components\Customisers\Precognition\InputCustomiser as PrecognitionInputCustomiser;
 use AppKit\Formulate\Facades\Formulate;
 use AppKit\Formulate\FormulateComponentAttributeBag;
 use AppKit\Formulate\Helpers\Routing\Route;
@@ -27,6 +28,8 @@ class Form extends Component
         ?array $routeParams = null,
         array | Model $data = []
     ) {
+        $alpineAdded = false;
+
         Formulate::registerForm($this);
 
         // if we have some data that has been passed into the form
@@ -62,11 +65,19 @@ class Form extends Component
 
             if ($this->routeDetails->supportsPrecognition()) {
                 UI::customiseComponents([
-                    FieldError::class => FieldErrorCustomiser::class,
-                    UIForm::class => FormCustomiser::class,
-                    Input::class => InputCustomiser::class,
+                    FieldError::class => PrecognitionFieldErrorCustomiser::class,
+                    UIForm::class => PrecognitionFormCustomiser::class,
+                    Input::class => PrecognitionInputCustomiser::class,
                 ]);
+
+                $alpineAdded = true;
             }
+        }
+
+        if (!$alpineAdded) {
+            UI::customiseComponents([
+                UIForm::class => AlpineJsFormCustomiser::class,
+            ]);
         }
     }
 

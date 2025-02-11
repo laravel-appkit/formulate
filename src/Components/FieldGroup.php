@@ -17,7 +17,7 @@ class FieldGroup extends Component
      * @param Input $field
      * @return void
      */
-    public function __construct(public ?string $name = '', public bool $multiple = false, public bool $orderable = false, public string $label = '')
+    public function __construct(public ?string $name = '', public bool $multiple = false, public bool $orderable = false, public string $label = '', public bool $required = false)
     {
         if ($multiple) {
             UI::customiseComponents([

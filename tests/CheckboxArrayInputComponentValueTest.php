@@ -16,9 +16,9 @@ class CheckboxArrayInputComponentValueTest extends TestCase
         $data = [];
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="checkbox" name="my-input[]" value="checkbox-value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="checkbox" name="my-input[]" value="checkbox-value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type=checkbox]')->withAttributeValue('value', 'checkbox-value');
@@ -31,9 +31,9 @@ class CheckboxArrayInputComponentValueTest extends TestCase
         $data = ['my-input' => []];
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="checkbox" name="my-input[]" value="checkbox-value" checked />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="checkbox" name="my-input[]" value="checkbox-value" checked />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type="checkbox"]')->withAttributeValue('value', 'checkbox-value')->withoutAttribute('checked');
@@ -46,9 +46,9 @@ class CheckboxArrayInputComponentValueTest extends TestCase
         $data = ['my-input' => ['checkbox-value']];
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="checkbox" name="my-input[]" value="checkbox-value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="checkbox" name="my-input[]" value="checkbox-value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type="checkbox"]')->withAttributeValue('value', 'checkbox-value')->withAttribute('checked');
@@ -62,9 +62,9 @@ class CheckboxArrayInputComponentValueTest extends TestCase
         $this->mockPostedValues(['my-input' => ['checkbox-value']]);
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="checkbox" name="my-input[]" value="checkbox-value" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="checkbox" name="my-input[]" value="checkbox-value" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[type="checkbox"]')->withAttributeValue('value', 'checkbox-value')->withAttribute('checked');
@@ -77,11 +77,11 @@ class CheckboxArrayInputComponentValueTest extends TestCase
         $data = ['articles' => factory(Article::class, 2)->create()];
 
         // render the blade component
-        $view = $this->blade('<x-form :data="$data">
-            <x-input type="checkbox" name="articles[]" value="1" />
-            <x-input type="checkbox" name="articles[]" value="2" />
-            <x-input type="checkbox" name="articles[]" value="3" />
-        </x-form>', compact('data'));
+        $view = $this->blade('<x-formulate::form :data="$data">
+            <x-formulate::input type="checkbox" name="articles[]" value="1" />
+            <x-formulate::input type="checkbox" name="articles[]" value="2" />
+            <x-formulate::input type="checkbox" name="articles[]" value="3" />
+        </x-formulate::form>', compact('data'));
 
         // test the component
         $view->assertHasElement('input[value="1"]')->withAttributeValue('name', 'articles[]')->withAttribute('checked');

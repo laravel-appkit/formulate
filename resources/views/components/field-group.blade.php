@@ -9,7 +9,7 @@
         </x-appkit::repeating-group>
     </x-appkit::fieldset>
 @else
-    <x-appkit::field-group :$label :$name>
+    <x-appkit::field-group :$required :$label :$name {{ $attributes }}>
         {{ $slot }}
     </x-appkit::field-group>
 @endif

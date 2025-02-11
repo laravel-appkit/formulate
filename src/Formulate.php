@@ -21,6 +21,7 @@ use AppKit\Formulate\Components\RepeatingFieldComponent;
 use AppKit\Formulate\Components\RepeatingFieldRemoveButtonComponent;
 use AppKit\Formulate\Components\SelectComponent;
 use AppKit\Formulate\Components\TextareaComponent;
+use AppKit\UI\Facades\UI;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
@@ -142,7 +143,7 @@ class Formulate
         $this->formData = $data;
     }
 
-    public function getForm(): Form
+    public function getForm(): ?Form
     {
         return $this->form;
     }
@@ -336,7 +337,7 @@ class Formulate
      */
     public function highlightOptionalFields(): void
     {
-        config(['formulate.highlight_optional_fields' => true]);
+        UI::highlightOptionalFormFields();
     }
 
     /**
@@ -346,6 +347,6 @@ class Formulate
      */
     public function highlightRequiredFields(): void
     {
-        config(['formulate.highlight_optional_fields' => false]);
+        UI::highlightRequiredFormFields();
     }
 }
