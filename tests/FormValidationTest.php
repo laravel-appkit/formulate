@@ -65,6 +65,6 @@ class FormValidationTest extends TestCase
         </x-formulate::form>');
 
         // test the component
-        $view->assertHasElement('div > div')->withContent(config('formulate.form_error_message'));
+        $view->assertHasElement('div > div > div > div > div')->withContent(config('formulate.form_error_message'));
     }
 }
